@@ -1,18 +1,45 @@
 package com.app.pdi.aplicacionmovilpdi.model.Object;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Persona {
 
+    @SerializedName("id_persona")
+    @Expose
     private int idPersona;
+    @SerializedName("nombre")
+    @Expose
     private String nombre;
+    @SerializedName("apellido")
+    @Expose
     private String apellido;
+    @SerializedName("rut")
+    @Expose
     private String rut;
+    @SerializedName("fecha_nacimiento")
+    @Expose
     private String fechaNacimiento;
+    @SerializedName("email")
+    @Expose
     private String email;
+    @SerializedName("telefono")
+    @Expose
     private String telefono;
+    @SerializedName("sexo")
+    @Expose
     private String sexo;
+    @SerializedName("contrasena")
+    @Expose
     private String contrasena;
+    @SerializedName("auth_key")
+    @Expose
     private String authKey;
+    @SerializedName("comuna_id_comuna")
+    @Expose
     private int comunaIdComuna;
+    @SerializedName("rol_id_rol")
+    @Expose
     private int rolIdRol;
 
     /**
@@ -52,6 +79,19 @@ public class Persona {
         this.comunaIdComuna = comunaIdComuna;
         this.rolIdRol = rolIdRol;
     }
+
+    public Persona(String nombre, String apellido,  String telefono,  String email,String contrasena, String fechaNacimiento, String sexo){
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.fechaNacimiento = fechaNacimiento;
+        this.email = email;
+        this.telefono = telefono;
+        this.sexo = sexo;
+        this.contrasena = contrasena;
+
+
+    }
+
 
     public int getIdPersona() {
         return idPersona;

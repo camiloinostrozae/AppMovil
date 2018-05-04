@@ -1,5 +1,6 @@
 package com.app.pdi.aplicacionmovilpdi.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -53,13 +54,32 @@ public class Login extends AppCompatActivity implements LoginView {
         password.setError("Campo obligatorio");
     }
 
+
+    //En caso que el inicio de sesión resulte exitoso lo llevamos a la Activity principal
     @Override
-    public void showResult(String result) {
-        Toast.makeText(Login.this,result,Toast.LENGTH_SHORT).show();
+    public void loginSuccess() {
+        Intent intent = new Intent(this,PrincipalActivity.class);
+        startActivity(intent);
 
     }
+
+
+    //En caso que el inicio de sesion falle mandamos un mensaje
+    @Override
+    public void loginFailed(String mensaje) {
+        Toast.makeText(Login.this,mensaje,Toast.LENGTH_SHORT).show();
+
+    }
+
     //botón "iniciar sesion del el login"
     public void validacion(View view){
      presenter.validarUsuario(email.getText().toString(),password.getText().toString());
     }
+
+    public void irRegistro(View view){
+        Intent intent = new Intent(this,RegistroActivity.class);
+        startActivity(intent);
+    }
+
+
 }

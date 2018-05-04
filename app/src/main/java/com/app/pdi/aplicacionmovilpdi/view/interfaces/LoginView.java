@@ -5,5 +5,6 @@ public interface LoginView {
     void showProgress(boolean progreso);
     void setErrorUser();
     void setErrorPassword();
-    void showResult(String result);
+    void loginSuccess();
+    void loginFailed(String mensaje);
 }

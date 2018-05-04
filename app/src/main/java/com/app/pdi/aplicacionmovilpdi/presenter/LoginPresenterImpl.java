@@ -34,7 +34,6 @@ public class LoginPresenterImpl implements LoginPresenter, OnLoginFinishListener
         if(view != null)
         {
             view.showProgress(false);
-            view.showResult(result);
         }
     }
 
@@ -56,18 +55,17 @@ public class LoginPresenterImpl implements LoginPresenter, OnLoginFinishListener
                         public void onResponse(Call<InicioSesion> call, Response<InicioSesion> response) {
                             if(response.isSuccessful()){
                                 InicioSesion inicio = response.body();
-                                if(inicio.isMensaje()){
-                                    view.showResult("Si esta registrado");
+                                if(inicio.isEstado()){
+                                    view.loginSuccess();
                                     view.showProgress(false);
                                 }else{
-                                    view.showResult("No esta registrado");
+                                    view.loginFailed("Datos no válidos");
                                     view.showProgress(false);
                                 }
 
                             }else{
-                                view.showResult("Error");
+                                view.loginFailed("Error");
                             }
-
                         }
 
                         @Override
