@@ -8,7 +8,8 @@ public class InicioSesion {
     private String mensaje;
     private String nombre;
     private String apellido;
-    private String email;
+    private String rut;
+    private String contrasena;
     private String authKey;
 
     /**
@@ -27,14 +28,15 @@ public class InicioSesion {
      * @param authKey
      * @param mensaje
      */
-    public InicioSesion(int codigo, boolean estado, String mensaje, String nombre, String apellido, String email, String authKey) {
+    public InicioSesion(int codigo, boolean estado, String mensaje, String nombre, String apellido, String rut, String contrasena, String authKey) {
         super();
         this.codigo = codigo;
         this.estado = estado;
         this.mensaje = mensaje;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.email = email;
+        this.rut = rut;
+        this.contrasena = contrasena;
         this.authKey = authKey;
     }
 
@@ -79,11 +81,11 @@ public class InicioSesion {
     }
 
     public String getEmail() {
-        return email;
+        return rut;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String rut) {
+        this.rut = rut;
     }
 
     public String getAuthKey() {
@@ -92,6 +94,22 @@ public class InicioSesion {
 
     public void setAuthKey(String authKey) {
         this.authKey = authKey;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public String getRut() {
+        return rut;
+    }
+
+    public void setRut(String rut) {
+        this.rut = rut;
     }
 
 }

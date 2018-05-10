@@ -14,4 +14,11 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string-array name="region">
+        <item>Seleccione una región</item>
+    </string-array>
+
+    <string-array name="comuna">
+        <item>Seleccione una comuna</item>
+    </string-array>
 </resources>

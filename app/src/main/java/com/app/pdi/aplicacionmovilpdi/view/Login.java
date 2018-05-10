@@ -9,13 +9,14 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.app.pdi.aplicacionmovilpdi.R;
+import com.app.pdi.aplicacionmovilpdi.model.utils.NetworkState;
 import com.app.pdi.aplicacionmovilpdi.presenter.interfaces.LoginPresenter;
 import com.app.pdi.aplicacionmovilpdi.view.interfaces.LoginView;
 import com.app.pdi.aplicacionmovilpdi.presenter.LoginPresenterImpl;
 
 public class Login extends AppCompatActivity implements LoginView {
 
-    private EditText email, password;
+    private EditText rut, password;
     private ProgressBar progressBar;
 
     //Para mandar llamar al LoginPresenter , la interface
@@ -26,11 +27,12 @@ public class Login extends AppCompatActivity implements LoginView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        email=(EditText)findViewById(R.id.email);
+        rut=(EditText)findViewById(R.id.lrut);
         password=(EditText)findViewById(R.id.password);
         progressBar=(ProgressBar)findViewById(R.id.progressBar);
          //presenter implementado
         presenter = new LoginPresenterImpl(this);
+        isAvailable();
     }
 
     @Override
@@ -46,7 +48,7 @@ public class Login extends AppCompatActivity implements LoginView {
 
     @Override
     public void setErrorUser() {
-        email.setError("Campo obligatorio");
+        rut.setError("Campo obligatorio");
     }
 
     @Override
@@ -71,14 +73,41 @@ public class Login extends AppCompatActivity implements LoginView {
 
     }
 
+    @Override
+    public void setRutError() {
+        rut.setError("El Rut ingresado no se encuentra registrado en la aplicación");
+    }
+
+    @Override
+    public void setPassNoExist() {
+        password.setError("Contraseña inválida");
+    }
+
+    @Override
+    public void setErrorRutNoExiste() {
+        rut.setError("El rut ingresado no existe");
+    }
+
+    @Override
+    public void setErrorConexion(String mensaje) {
+        Toast.makeText(Login.this,mensaje,Toast.LENGTH_SHORT).show();
+    }
+
     //botón "iniciar sesion del el login"
     public void validacion(View view){
-     presenter.validarUsuario(email.getText().toString(),password.getText().toString());
+
+     presenter.validarUsuario(rut.getText().toString(),password.getText().toString());
     }
 
     public void irRegistro(View view){
         Intent intent = new Intent(this,RegistroActivity.class);
         startActivity(intent);
+    }
+
+    public  void isAvailable(){
+        if(NetworkState.getInstance().estadoConexion(this)){
+            Toast.makeText(Login.this,"SIN CONEXIÓN",Toast.LENGTH_SHORT).show();
+        }
     }
 
 

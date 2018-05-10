@@ -7,5 +7,5 @@ import retrofit2.Call;
 
 public interface LoginInteractor {
 
-    Call<InicioSesion> login(String email, String contrasena, OnLoginFinishListener onLoginFinishListener);
+    Call<InicioSesion> login(String rut, String contrasena, OnLoginFinishListener onLoginFinishListener);
 }

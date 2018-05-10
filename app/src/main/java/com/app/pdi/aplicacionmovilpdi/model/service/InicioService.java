@@ -8,6 +8,6 @@ import retrofit2.http.Path;
 
 public interface InicioService {
 
-    @GET("login/{email}/{contrasena}")
-    Call<InicioSesion> login(@Path("email")String email, @Path("contrasena")String contrasena);
+    @GET("login/{rut}/{contrasena}")
+    Call<InicioSesion> login(@Path("rut")String rut, @Path("contrasena")String contrasena);
 }

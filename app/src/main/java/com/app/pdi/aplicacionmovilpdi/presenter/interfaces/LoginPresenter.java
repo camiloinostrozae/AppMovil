@@ -4,5 +4,6 @@ public interface LoginPresenter {
 
    void showErrorPresenter(String error);
    void showResultPresenter(String result);
-    void validarUsuario(String email, String pass);
+    void validarUsuario(String rut, String pass);
+    boolean validarDatosCorrectos(String rut, String contrasena);
 }

@@ -11,6 +11,6 @@ import retrofit2.Call;
 public interface RegistroInteractor {
 
 
-    Call<ResponseRegistro> createPersona(String nombre, String apellido, String telefono, String email, String contrasena,
-                                String fechaNacimiento, String sexo);
+    Call<ResponseRegistro> createPersona(String nombre, String apellido, String rut,String telefono, String email, String contrasena,
+                                String fechaNacimiento, String sexo, int comuna);
 }

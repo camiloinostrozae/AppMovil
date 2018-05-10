@@ -19,10 +19,12 @@ public interface PersonaService {
     @POST("create-persona")
     Call<ResponseRegistro>registrarUsuario(@Field("nombre") String nombre,
                                            @Field("apellido") String apellido,
+                                           @Field("rut") String rut,
                                            @Field("telefono") String telefono,
                                            @Field("email") String email,
                                            @Field("contrasena") String contrasena,
                                            @Field("fecha_nacimiento") String fechaNacimiento,
-                                           @Field("sexo") String sexo);
+                                           @Field("sexo") String sexo,
+                                           @Field("comuna_id_comuna") int comuna);
 
 }

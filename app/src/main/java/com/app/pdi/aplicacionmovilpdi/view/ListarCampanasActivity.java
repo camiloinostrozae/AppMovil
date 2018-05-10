@@ -1,0 +1,15 @@
+package com.app.pdi.aplicacionmovilpdi.view;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+import com.app.pdi.aplicacionmovilpdi.R;
+
+public class ListarCampanasActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_listar_campanas);
+    }
+}

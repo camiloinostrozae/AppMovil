@@ -1,11 +1,10 @@
-package com.app.pdi.aplicacionmovilpdi.model.preferences;
+package com.app.pdi.aplicacionmovilpdi.model.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 import com.app.pdi.aplicacionmovilpdi.model.Object.InicioSesion;
-import com.app.pdi.aplicacionmovilpdi.model.Object.Persona;
 
 public class SharedPreferencesSesion {
 
@@ -13,7 +12,8 @@ public class SharedPreferencesSesion {
     public static final String PREFERENCES_USER_NAME = "PREFERENCES_USER_NAME";
     public static final String PREFERENCES_USER_APELLIDO = "PREFERENCES_USER_APELLIDO";
     public static final String PREFERENCES_USER_AUTHKEY = "PREFERENCES_USER_AUTHKEY";
-    public static final String PREFERENCES_USER_EMAIL = "PREFERENCES_USER_EMAIL";
+    public static final String PREFERENCES_USER_RUT = "PREFERENCES_USER_EMAIL";
+    public static final String PREFERENCES_USER_CONTRASENA = "PREFERENCES_USER_CONTRASENA";
 
     private final SharedPreferences preferences;
     private boolean userLoggedIn = false;
@@ -43,7 +43,8 @@ public class SharedPreferencesSesion {
             editor.putString(PREFERENCES_USER_NAME,sesion.getNombre());
             editor.putString(PREFERENCES_USER_APELLIDO,sesion.getApellido());
             editor.putString(PREFERENCES_USER_AUTHKEY,sesion.getAuthKey());
-            editor.putString(PREFERENCES_USER_EMAIL,sesion.getEmail());
+            editor.putString(PREFERENCES_USER_RUT,sesion.getRut());
+            editor.putString(PREFERENCES_USER_CONTRASENA,sesion.getContrasena());
             editor.apply();
 
             userLoggedIn = true;
@@ -56,7 +57,8 @@ public class SharedPreferencesSesion {
         editor.putString(PREFERENCES_USER_NAME,null);
         editor.putString(PREFERENCES_USER_APELLIDO,null);
         editor.putString(PREFERENCES_USER_AUTHKEY,null);
-        editor.putString(PREFERENCES_USER_EMAIL,null);
+        editor.putString(PREFERENCES_USER_RUT,null);
+        editor.putString(PREFERENCES_USER_CONTRASENA,null);
         editor.apply();
     }
 }
