@@ -9,6 +9,8 @@ import com.app.pdi.aplicacionmovilpdi.model.interactor.interfaces.RegistroIntera
 import com.app.pdi.aplicacionmovilpdi.presenter.interfaces.RegistroPresenter;
 import com.app.pdi.aplicacionmovilpdi.view.interfaces.RegistroView;
 
+import java.nio.file.Path;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,7 +28,7 @@ public class RegistroPresenterImpl implements RegistroPresenter {
 
     }
     @Override
-    public void validarRegistroPresenter(String nombre, String apellido, String rut, String telefono, String email, String contrasena, String fechaNacimiento, String sexo,int comuna) {
+    public void validarRegistroPresenter(String nombre, String apellido, String rut, String telefono, String email, String contrasena, String fechaNacimiento, String sexo,String comuna) {
         Log.e("Dato", nombre);
         Log.e("Dato", apellido);
         Log.e("Dato", telefono);
@@ -48,10 +50,12 @@ public class RegistroPresenterImpl implements RegistroPresenter {
                                 if(inicio.isEstado()){
                                     view.registroSuccess();
                                     view.showProgress(false);
+                                }else if(inicio.getCodigo()==1){
+                                    view.setErrorRutExiste();
+                                     view.showProgress(false);
                                 }else{
                                     view.registroFailed("Datos no válidos");
                                     view.showProgress(false);
-
                                 }
 
                             }else{
@@ -74,15 +78,26 @@ public class RegistroPresenterImpl implements RegistroPresenter {
     }
 
     @Override
-    public boolean validarDatosCorrectos(String nombre, String apellido, String rut, String telefono, String email, String contrasena, String fechaNacimiento, String sexo,int comuna) {
+    public boolean validarDatosCorrectos(String nombre, String apellido, String rut, String telefono, String email, String contrasena, String fechaNacimiento, String sexo,String comuna) {
 
         if(nombre.isEmpty()) {
             view.setErrorNombre();
             view.showProgress(false);
             return false;
         }
+        if(!validarNombre(nombre)){
+            view.setNombreNoValido();
+            view.showProgress(false);
+            return false;
+        }
         if(apellido.isEmpty()) {
             view.setErrorApellido();
+            view.showProgress(false);
+            return false;
+        }
+
+        if(!validarApellido(apellido)){
+            view.setErrorApellidoNoValido();
             view.showProgress(false);
             return false;
         }
@@ -141,6 +156,20 @@ public class RegistroPresenterImpl implements RegistroPresenter {
             return false;
         }
 
+        if(sexo.equals("Seleccione una opción")){
+            view.setErrorSexo();
+            view.showProgress(false);
+            return false;
+        }
+
+        if(comuna.equals("Seleccione una comuna")){
+            view.setErrorComuna();
+            view.showProgress(false);
+            return false;
+        }
+
+
+
         return true;
     }
 
@@ -169,5 +198,13 @@ public class RegistroPresenterImpl implements RegistroPresenter {
         } catch (Exception e) {
         }
         return validacion;
+    }
+
+    public boolean validarNombre(String nombre){
+        return nombre.matches("[A-Z][a-zA-Z]*");
+    }
+
+    public boolean validarApellido(String apellido){
+        return apellido.matches("[a-zA-Z]+([ '-][a-zA-Z]+)*");
     }
 }

@@ -6,16 +6,21 @@ public interface RegistroView {
     void registroSuccess();
     void registroFailed(String mensaje);
     void setErrorNombre();
+    void setNombreNoValido();
     void setErrorApellido();
+    void setErrorApellidoNoValido();
     void setErrorRut();
     void setErrorEstruturaRut();
+    void setErrorRutExiste();
     void setErrorEmail();
     void setEstructuraEmail();
+    void setEmailExiste();
     void setErrorContrasena();
     void setErrorTelefono();
     void setEstructuraTelefono();
     void setErrorFechaNacimiento();
     void setErrorSexo();
+    void setErrorRegion();
     void setErrorComuna();
 
 }

@@ -25,6 +25,6 @@ public interface PersonaService {
                                            @Field("contrasena") String contrasena,
                                            @Field("fecha_nacimiento") String fechaNacimiento,
                                            @Field("sexo") String sexo,
-                                           @Field("comuna_id_comuna") int comuna);
+                                           @Field("comuna_id_comuna") String comuna);
 
 }

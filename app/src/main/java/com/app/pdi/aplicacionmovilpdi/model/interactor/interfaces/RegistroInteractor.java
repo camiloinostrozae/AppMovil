@@ -12,5 +12,5 @@ public interface RegistroInteractor {
 
 
     Call<ResponseRegistro> createPersona(String nombre, String apellido, String rut,String telefono, String email, String contrasena,
-                                String fechaNacimiento, String sexo, int comuna);
+                                String fechaNacimiento, String sexo, String comuna);
 }

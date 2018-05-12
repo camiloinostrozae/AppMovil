@@ -35,6 +35,11 @@ public class Comuna {
         this.regionIdRegion = regionIdRegion;
     }
 
+    public Comuna(int idComuna, String nombre){
+        this.idComuna = idComuna;
+        this.nombre = nombre;
+    }
+
     public int getIdComuna() {
         return idComuna;
     }

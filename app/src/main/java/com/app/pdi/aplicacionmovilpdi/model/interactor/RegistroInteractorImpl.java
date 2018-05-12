@@ -38,7 +38,7 @@ public class RegistroInteractorImpl implements RegistroInteractor {
         personaService =retrofit.create(PersonaService.class);
     }
     @Override
-    public Call<ResponseRegistro> createPersona(String nombre, String apellido, String rut, String telefono, String email,  String contrasena,String fechaNacimiento,String sexo, int comuna) {
+    public Call<ResponseRegistro> createPersona(String nombre, String apellido, String rut, String telefono, String email,  String contrasena,String fechaNacimiento,String sexo, String comuna) {
         return personaService.registrarUsuario(nombre,apellido, rut, telefono,email, contrasena, fechaNacimiento, sexo, comuna);
     }
 }

@@ -2,6 +2,7 @@ package com.app.pdi.aplicacionmovilpdi.view;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.pdi.aplicacionmovilpdi.R;
@@ -26,6 +28,7 @@ import com.app.pdi.aplicacionmovilpdi.view.interfaces.RegistroView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -39,16 +42,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RegistroActivity extends AppCompatActivity implements RegistroView {
 
     //datos que no requieren de un tratamiento especial
-    private EditText nombre, apellido, password,telefono, email,fechaNacimiento,rut;
+    private EditText nombre, apellido, password, telefono, email, fechaNacimiento, rut;
     //Spinner del sexo
     private Spinner sexo;
+    private TextView label_sexo, label_region, label_comuna;
     private Spinner region_spinner;
+    private HashMap<Integer,String> spinnerComunaMap;
     private ArrayList<String> region_nombre;
     private ArrayList<Integer> region_id;
     private ArrayAdapter<String> regionArrayAdapter;
     private Spinner comuna_spinner;
     private ArrayList<String> comuna_nombre;
     private ArrayList<Integer> comuna_id;
+    private String id;
     private ArrayAdapter<String> comunaArrayAdapter;
     //Barra de progreso
     private ProgressBar progressBar;
@@ -57,7 +63,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
     //Para mostrar la fecha de nacimiento como calendario
     Calendar calendar;
     int dia, mes, anio;
-    private ArrayList<Comuna>comunas;
+    private ArrayList<Comuna> comunas;
 
 
     @Override
@@ -68,75 +74,76 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
         region_id = new ArrayList<>();
         comuna_nombre = new ArrayList<>();
         comuna_id = new ArrayList<>();
-
-        nombre = (EditText) findViewById(R.id.nombre);
-        apellido = (EditText) findViewById(R.id.apellido);
-        password = (EditText) findViewById(R.id.rcontraseña);
-        email = (EditText) findViewById(R.id.remail);
-        telefono = (EditText)findViewById(R.id.telefono);
-        fechaNacimiento = (EditText)findViewById(R.id.rfechanacimiento);
-        rut = (EditText)findViewById(R.id.rut);
+         nombre = (EditText)findViewById(R.id.nombre);
+         apellido = (EditText)findViewById(R.id.apellido);
+         telefono = (EditText)findViewById(R.id.telefono);
+         email =  (EditText)findViewById(R.id.remail);
+         password = (EditText)findViewById(R.id.rcontrasena);
+         rut = (EditText)findViewById(R.id.rut);
+         fechaNacimiento = (EditText)findViewById(R.id.rfechanacimiento);
         //Spinner para el sexo
         sexo = (Spinner) findViewById(R.id.sexo);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.opciones,android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.opciones, android.R.layout.simple_spinner_dropdown_item);
         sexo.setAdapter(adapter);
+        label_sexo = findViewById(R.id.label_sexo);
         //Spinner para la region
-        comuna_spinner = (Spinner)findViewById(R.id.comuna);
+        comuna_spinner = (Spinner) findViewById(R.id.comuna);
+        label_comuna = findViewById(R.id.label_comuna);
         //getComunas();
-        region_spinner = (Spinner)findViewById(R.id.region);
+        region_spinner = (Spinner) findViewById(R.id.region);
+        label_region = findViewById(R.id.label_region);
         comunas = new ArrayList<>();
 
         //barra de progreso
-        progressBar = (ProgressBar)findViewById(R.id.rProgressBar);
+        progressBar = (ProgressBar) findViewById(R.id.rProgressBar);
 
         //Instanciamos el calendario que se mostrará en la fecha de nacimiento
         calendar = Calendar.getInstance();
         dia = calendar.get(Calendar.DAY_OF_MONTH);
         mes = calendar.get(Calendar.MONTH);
         anio = calendar.get(Calendar.YEAR);
-        fechaNacimiento.setText(dia +"-" + mes +"-"+anio);
         fechaNacimiento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerDialog dialog = new DatePickerDialog(RegistroActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        i1 = i1 +1;
-                        fechaNacimiento.setText(i2+"-"+i1+"-"+i);
+                        i1 = i1 + 1;
+                        fechaNacimiento.setText(i2 + "-" + i1 + "-" + i);
 
                     }
-                }, anio,mes,dia);
+                }, anio, mes, dia);
                 dialog.show();
             }
         });
 
         //Instanciamos el registroPresenterImpl a través de la interface RegistroPresenter
-        presenter  = new RegistroPresenterImpl(this);
-        //region.setOnItemSelectedListener(region_listener);
-        getRegion2();
+        presenter = new RegistroPresenterImpl(this);
+        getRegion();
         setSpinnerItem();
         region_spinner.setOnItemSelectedListener(region_listener);
+        comuna_spinner.setOnItemSelectedListener(comuna_listener);
 
     }
 
     @Override
     public void showProgress(boolean progress) {
-        if(progress){
+        if (progress) {
             progressBar.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             progressBar.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void registroSuccess() {
-        Intent intent = new Intent(this,Login.class);
+        Intent intent = new Intent(this, Login.class);
         startActivity(intent);
     }
 
     @Override
     public void registroFailed(String mensaje) {
-        Toast.makeText(this,mensaje,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -146,8 +153,19 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
     }
 
     @Override
+    public void setNombreNoValido() {
+        nombre.setError("Nombre no válido");
+    }
+
+    @Override
     public void setErrorApellido() {
         apellido.setError("Campo obligatorio");
+
+    }
+
+    @Override
+    public void setErrorApellidoNoValido() {
+        apellido.setError("Apellido no válido");
 
     }
 
@@ -162,6 +180,11 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
     }
 
     @Override
+    public void setErrorRutExiste() {
+        rut.setError("El R.U.N ingresado ya se encuentra registrado en la aplicación ");
+    }
+
+    @Override
     public void setErrorEmail() {
         email.setError("Campo obligatorio");
 
@@ -170,6 +193,11 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
     @Override
     public void setEstructuraEmail() {
         email.setError("Email inválido");
+    }
+
+    @Override
+    public void setEmailExiste() {
+        email.setError("El email ingresado ya se encuentra registrado en la aplicación");
     }
 
     @Override
@@ -186,7 +214,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
 
     @Override
     public void setEstructuraTelefono() {
-        telefono.setError("El télefono debe estar compuesto por 8 dígitos");
+        telefono.setError("El télefono debe contener 9 dígitos");
     }
 
     @Override
@@ -197,120 +225,65 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
 
     @Override
     public void setErrorSexo() {
+        label_sexo.setError("Debe seleccionar su sexo");
+    }
 
+    @Override
+    public void setErrorRegion() {
+        label_region.setError("Debe seleccionar una región");
     }
 
     @Override
     public void setErrorComuna() {
-
+        label_comuna.setError("Debe seleccionar una comuna");
     }
 
-
-    public void validacionRegistro(View view){
-        presenter.validarRegistroPresenter(nombre.getText().toString(),apellido.getText().toString(),rut.getText().toString(),
-                telefono.getText().toString(),email.getText().toString(),password.getText().toString(),
-                fechaNacimiento.getText().toString(),sexo.getSelectedItem().toString(),comuna_spinner.getSelectedItemPosition());
+    //Se manda llamar al presenter con los datos que el usuario ingresó
+    public void validacionRegistro(View view) {
+        presenter.validarRegistroPresenter(nombre.getText().toString(), apellido.getText().toString(), rut.getText().toString(),
+                telefono.getText().toString(), email.getText().toString(), password.getText().toString(),
+                fechaNacimiento.getText().toString(), sexo.getSelectedItem().toString(),id);
     }
 
+    /*Método que esta al modo escucha cuando el usuario seleccione una región y luego en base a la región seleccionada se
+      se muestran las comunas*/
+    private AdapterView.OnItemSelectedListener region_listener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
+            if (posicion > 0) {
+                getComuna(region_id.get(posicion));
 
-        public void getRegiones() {
-            Retrofit retrofit;
-            ObtenerDatosService service;
-            OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                    .connectTimeout(1, TimeUnit.MINUTES)
-                    .readTimeout(60,TimeUnit.SECONDS)
-                    .writeTimeout(60,TimeUnit.SECONDS)
-                    .build();
-            retrofit = new Retrofit.Builder()
-                    .baseUrl("http://10.0.3.2/ProyectoTitulo/web/services/service-region/")
-                    .client(okHttpClient)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-            service =retrofit.create(ObtenerDatosService.class);
-
-            Call<List<Region>> call = service.obtenerRegion();
-            call.enqueue(new Callback<List<Region>>() {
-                @Override
-                public void onResponse(Call<List<Region>> call, Response<List<Region>> response) {
-                    List<Region> lista = response.body();
-                    String [] regiones  =new String[lista.size()];
-                    for(int i = 0;i<lista.size();i++){
-                        regiones[i] = lista.get(i).getNombre();
-                    }
-
-                    region_spinner.setAdapter(new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_dropdown_item,regiones));
-                    //region.setOnItemClickListener();
-                }
-
-                @Override
-                public void onFailure(Call<List<Region>> call, Throwable t) {
-                    t.printStackTrace();
-
-                }
-            });
-
+            }
         }
 
-  /*  public void getComunas() {
-        Retrofit retrofit;
-        ObtenerDatosService service;
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .connectTimeout(1, TimeUnit.MINUTES)
-                .readTimeout(60,TimeUnit.SECONDS)
-                .writeTimeout(60,TimeUnit.SECONDS)
-                .build();
-        retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.3.2/ProyectoTitulo/web/services/service-comuna/")
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        service =retrofit.create(ObtenerDatosService.class);
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
 
-        Call<List<Comuna>> call = service.obtenerComuna();
-        call.enqueue(new Callback<List<Comuna>>() {
-            @Override
-            public void onResponse(Call<List<Comuna>> call, Response<List<Comuna>> response) {
-                List<Comuna> lista = response.body();
-                String [] comunas  =new String[lista.size()];
-                for(int i = 0;i<lista.size();i++){
-                    comunas[i] = lista.get(i).getNombre();
-                }
+        }
+    };
 
-                comuna_spinner.setAdapter(new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_dropdown_item,comunas));
-                //region.setOnItemClickListener();
+
+    /*Método que esta al modo escucha cuando el usuario seleccione una región y luego en base a la región seleccionada se
+      se muestran las comunas*/
+    private AdapterView.OnItemSelectedListener comuna_listener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
+            if (posicion > 0) {
+                id = comuna_id.get(posicion).toString();
+            }else{
+                id = "Seleccione una comuna";
             }
+        }
 
-            @Override
-            public void onFailure(Call<List<Comuna>> call, Throwable t) {
-                t.printStackTrace();
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
 
-            }
-        });
-
-    }
-    */
-
-        private AdapterView.OnItemSelectedListener region_listener = new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int posicion, long l) {
-                if(posicion>0){
-                    getComuna2(region_id.get(posicion));
-                }
-
-              //  comunaArrayAdapter = new ArrayAdapter<Comuna>(getApplicationContext(),android.R.layout.simple_spinner_dropdown_item,tempComuna);
-               // comunaArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                //comuna_spinner.setAdapter(comunaArrayAdapter);
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        };
+        }
+    };
 
 
-    private void setSpinnerItem(){
+    //función para establecer los spinners mostrar los elementos de de región o comuna.
+    private void setSpinnerItem() {
         regionArrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.region));
         regionArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         region_spinner.setAdapter(regionArrayAdapter);
@@ -321,7 +294,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
         comuna_spinner.setEnabled(false);
     }
 
-    public void getRegion2(){
+    public void getRegion() {
         regionLoad(true);
         RestRegion.getRegion().obtenerRegion().enqueue(new Callback<List<Region>>() {
             @Override
@@ -330,21 +303,21 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
                 region_id.clear();
                 region_nombre.add("Seleccione una región");
                 region_id.add(0);
-               if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
 
-                   List<Region> lista = response.body();
-                   String[] regiones = new String[lista.size()];
-                   for (int i = 0; i < lista.size(); i++) {
+                    List<Region> lista = response.body();
+                    String[] regiones = new String[lista.size()];
+                    for (int i = 0; i < lista.size(); i++) {
                         region_nombre.add(lista.get(i).getNombre());
                         region_id.add(lista.get(i).getIdRegion());
-                   }
-                   regionArrayAdapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_dropdown_item,region_nombre);
-                   regionArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                   region_spinner.setAdapter(regionArrayAdapter);
-                   regionLoad(false);
-               }else{
-                   regionLoad(false);
-               }
+                    }
+                    regionArrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, region_nombre);
+                    regionArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    region_spinner.setAdapter(regionArrayAdapter);
+                    regionLoad(false);
+                } else {
+                    regionLoad(false);
+                }
             }
 
             @Override
@@ -357,44 +330,46 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
 
     }
 
-    public void regionLoad(boolean estado){
+    //Función que habilita la selección para las regiones
+    public void regionLoad(boolean estado) {
         region_spinner.setEnabled(true);
         comuna_spinner.setEnabled(false);
     }
 
-    public void getComuna2(int id){
+    public void getComuna(int id) {
         RestComuna.getComuna().obtenerComuna(id).enqueue(new Callback<List<Comuna>>() {
             @Override
             public void onResponse(Call<List<Comuna>> call, Response<List<Comuna>> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     comuna_nombre.clear();
                     comuna_id.clear();
                     comuna_nombre.add("Seleccione una comuna");
                     comuna_id.add(0);
                     List<Comuna> lista = response.body();
-                    String[] regiones = new String[lista.size()];
                     for (int i = 0; i < lista.size(); i++) {
                         comuna_nombre.add(lista.get(i).getNombre());
                         comuna_id.add(lista.get(i).getIdComuna());
+
                     }
-                    comunaArrayAdapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_dropdown_item,comuna_nombre);
+                    comunaArrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, comuna_nombre);
                     comunaArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     comuna_spinner.setAdapter(comunaArrayAdapter);
                     comunaLoad(false);
-                }else{
+                } else {
                     comunaLoad(false);
                 }
             }
 
             @Override
             public void onFailure(Call<List<Comuna>> call, Throwable t) {
-
+                t.printStackTrace();
             }
         });
 
     }
 
-    public void comunaLoad(boolean estado){
+    //Método que habilita la seleccion para las ocmunas dentro de spinner.
+    public void comunaLoad(boolean estado) {
         region_spinner.setEnabled(!estado);
         comuna_spinner.setEnabled(!estado);
     }

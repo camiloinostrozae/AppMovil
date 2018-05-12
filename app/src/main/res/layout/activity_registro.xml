@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,211 +9,237 @@
     android:background="@drawable/login_background"
     android:orientation="vertical"
     tools:context="com.app.pdi.aplicacionmovilpdi.view.RegistroActivity">
-    <LinearLayout
+
+    <ProgressBar
+        android:id="@+id/rProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:background="@drawable/login_background"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/nombre"
+        <LinearLayout
+            android:id="@+id/area_nombre_registro"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="75dp"
-            android:drawableLeft="@drawable/ic_person_black_24dp"
-            android:drawablePadding="8dp"
-            android:ems="10"
-            android:hint="Nombre"
-            android:inputType="textPersonName"
-            android:textColorHint="#fff" />
-
-        <EditText
-            android:id="@+id/apellido"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Apellido"
-            android:textColorHint="#fff"
-            android:drawableLeft="@drawable/ic_person_black_24dp"
-            android:drawablePadding="8dp"
-            android:layout_alignParentLeft="true"/>
-
-        <EditText
-            android:id="@+id/rut"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Rut"
-            android:textColorHint="#fff"
-            android:drawableLeft="@drawable/ic_person_black_24dp"
-            android:drawablePadding="8dp"
-            android:layout_alignParentLeft="true"/>
-
-        <EditText
-            android:id="@+id/telefono"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:drawableLeft="@drawable/ic_phone_black_24dp"
-            android:drawablePadding="8dp"
-            android:ems="10"
-            android:hint="Teléfono"
-            android:inputType="phone"
-            android:textColorHint="#fff" />
-
-        <EditText
-            android:id="@+id/remail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:ems="10"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:textColorHint="#fff"
-            android:drawableLeft="@drawable/ic_email_black_24dp"
-            android:drawablePadding="8dp"
-            android:layout_alignParentLeft="true"/>
+            android:layout_height="match_parent"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:orientation="vertical"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
 
 
+                <EditText
+                    android:id="@+id/nombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Nombre"
+                    android:inputType="textPersonName"
+                    android:singleLine="true"
+                    android:textColor="@color/colorText"
+                    android:textColorHint="#fff"
+                    android:layout_marginTop="75dp"
+                    android:drawableLeft="@drawable/ic_person_black_24dp"
+                    android:drawablePadding="8dp"
+                    style="@android:style/Widget.EditText"/>
 
-        <EditText
-            android:id="@+id/rfechanacimiento"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:ems="10"
-            android:inputType="date"
-            android:hint="Fecha de Nacimiento"
-            android:textColorHint="#fff"
-            android:drawableLeft="@drawable/ic_date_range"
-            android:drawablePadding="8dp"
-            android:layout_alignParentLeft="true"/>
 
-        <EditText
-            android:id="@+id/rcontraseña"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:drawableLeft="@drawable/ic_lock_black_24dp"
-            android:drawablePadding="8dp"
-            android:ems="10"
-            android:hint="Contraseña"
-            android:inputType="textPassword"
-            android:textColorHint="#fff"
-            android:layout_alignParentLeft="true" />
+                <EditText
+                    android:id="@+id/apellido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Apellido paterno"
+                    android:inputType="textPersonName"
+                    android:singleLine="true"
+                    android:textColor="@color/colorText"
+                    android:textColorHint="#fff"
+                    android:drawableLeft="@drawable/ic_person_black_24dp"
+                    android:drawablePadding="8dp"
+                    style="@android:style/Widget.EditText"/>
 
-        <TextView
-            android:id="@+id/label_sexo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:ems="10"
-            android:drawablePadding="8dp"
 
-            android:text="Seleccione su sexo"
-            android:drawableLeft="@drawable/ic_person_black_24dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:textColor="#fff"
-            android:layout_alignParentLeft="true"
+                <EditText
+                    android:id="@+id/rut"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="R.U.N"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:textColor="@color/colorText"
+                    android:textColorHint="#fff"
+                    android:drawableLeft="@drawable/ic_person_black_24dp"
+                    android:drawablePadding="8dp"
+                    style="@android:style/Widget.EditText"/>
 
-            />
 
-        <Spinner
-            android:id="@+id/sexo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:popupBackground="@color/colorAccent"
-            tools:listitem="@android:layout/simple_list_item_1"
-            />
-        <TextView
-            android:id="@+id/label_region"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:ems="10"
-            android:drawablePadding="8dp"
+                <EditText
+                    android:id="@+id/telefono"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Celular"
+                    android:inputType="phone"
+                    android:singleLine="true"
+                    android:textColor="@color/colorText"
+                    android:textColorHint="#fff"
+                    android:maxLength="9"
+                    android:drawableLeft="@drawable/ic_phone_black_24dp"
+                    android:drawablePadding="8dp"
+                    style="@android:style/Widget.EditText"/>
 
-            android:text="Seleccione una región"
-            android:drawableLeft="@drawable/ic_location_city_black_24dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:textColor="#fff"
-            android:layout_alignParentLeft="true"
 
-            />
-        <Spinner
-            android:id="@+id/region"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:popupBackground="@color/colorAccent"
-            tools:listitem="@android:layout/simple_list_item_1"
+                <EditText
+                    android:id="@+id/remail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Correo electrónico"
+                    android:inputType="textEmailAddress"
+                    android:singleLine="true"
+                    android:textColor="@color/colorText"
+                    android:textColorHint="#fff"
+                    android:drawableLeft="@drawable/ic_email_black_24dp"
+                    android:drawablePadding="8dp"
+                    style="@android:style/Widget.EditText"
+                    />
 
-            />
 
-        <TextView
-            android:id="@+id/label_comuna"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:ems="10"
-            android:drawablePadding="8dp"
-            android:text="Seleccione una comuna"
-            android:drawableLeft="@drawable/ic_location_city_black_24dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:textColor="#fff"
-            android:layout_alignParentLeft="true"
+                <EditText
+                    android:id="@+id/rfechanacimiento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Fecha de nacimiento"
+                    android:inputType="date"
+                    android:singleLine="true"
+                    android:textColor="@color/colorText"
+                    android:textColorHint="#fff"
+                    android:drawableLeft="@drawable/ic_person_black_24dp"
+                    android:drawablePadding="8dp"
+                    style="@android:style/Widget.EditText"
+                    />
 
-            />
-        <Spinner
-            android:id="@+id/comuna"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:popupBackground="@color/colorAccent"
-            tools:listitem="@android:layout/simple_list_item_1"
 
-            />
+                <EditText
+                    android:id="@+id/rcontrasena"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Contraseña"
+                    android:inputType="textPassword"
+                    android:singleLine="true"
+                    android:textColor="@color/colorText"
+                    android:textColorHint="#fff"
+                    android:drawableLeft="@drawable/ic_lock_black_24dp"
+                    android:drawablePadding="8dp"
+                    style="@android:style/Widget.EditText"
+                    />
 
-        <Button
-            android:id="@+id/registroRegistro"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp"
-            android:text="Registrarse"
-            android:onClick="validacionRegistro"/>
+            <TextView
+                android:id="@+id/label_sexo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:ems="10"
+                android:drawablePadding="8dp"
+                android:text="Sexo"
+                android:drawableLeft="@drawable/ic_person_black_24dp"
 
-        <ProgressBar
-            android:id="@+id/rProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center"
-            android:visibility="gone" />
+                android:textColor="#fff"
+                android:layout_alignParentLeft="true"
+                style="@android:style/Widget.EditText"
+
+                />
+
+            <Spinner
+                android:id="@+id/sexo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:popupBackground="@color/colorAccent"
+                android:textColor="@color/colorText"
+                tools:listitem="@android:layout/simple_list_item_1"
+
+                />
+            <TextView
+                android:id="@+id/label_region"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:ems="10"
+                android:drawablePadding="8dp"
+
+                android:text="Región"
+                android:drawableLeft="@drawable/ic_location_city_black_24dp"
+                android:textColor="#fff"
+                android:layout_alignParentLeft="true"
+                style="@android:style/Widget.EditText"
+
+                />
+            <Spinner
+                android:id="@+id/region"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:popupBackground="@color/colorAccent"
+                tools:listitem="@android:layout/simple_list_item_1"
+
+                />
+
+            <TextView
+                android:id="@+id/label_comuna"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:ems="10"
+                android:drawablePadding="8dp"
+                android:text="Comuna"
+                android:drawableLeft="@drawable/ic_location_city_black_24dp"
+                android:textColor="#fff"
+                android:layout_alignParentLeft="true"
+                style="@android:style/Widget.EditText"
+
+                />
+            <Spinner
+                android:id="@+id/comuna"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:popupBackground="@color/colorAccent"
+                tools:listitem="@android:layout/simple_list_item_1"
+
+                />
+
+            <Button
+                android:id="@+id/registroRegistro"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:text="Registrarse"
+                android:onClick="validacionRegistro"/>
+
+
+
 
     </LinearLayout>
 
 
 
 
-</ScrollView>
+    </ScrollView>
+
+
+
+
+
+</RelativeLayout>
