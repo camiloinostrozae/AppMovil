@@ -1,5 +1,6 @@
 package com.app.pdi.aplicacionmovilpdi.view;
 
+import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.design.widget.TextInputLayout;
@@ -59,6 +60,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
     //Barra de progreso
     private ProgressBar progressBar;
     private RegistroPresenter presenter;
+    private ActionBar actionBar;
 
     //Para mostrar la fecha de nacimiento como calendario
     Calendar calendar;
@@ -96,6 +98,9 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
 
         //barra de progreso
         progressBar = (ProgressBar) findViewById(R.id.rProgressBar);
+
+        actionBar  = getActionBar();
+        actionBar.hide();
 
         //Instanciamos el calendario que se mostrará en la fecha de nacimiento
         calendar = Calendar.getInstance();

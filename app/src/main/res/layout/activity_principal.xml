@@ -14,5 +14,17 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="151dp"
         android:layout_marginTop="185dp"
-        android:text="Bienvenido" />
+        android:text="Bienvenido"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="151dp" />
+
+    <Button
+        android:id="@+id/listarCampanas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="247dp"
+        android:text="Campañas"
+        android:onClick="ListarCampanas"/>
 </RelativeLayout>

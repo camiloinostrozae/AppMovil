@@ -26,6 +26,9 @@ public class Campana {
     @SerializedName("id_tipo_campana")
     @Expose
     private int idTipoCampana;
+    @SerializedName("tipo")
+    @Expose
+    private String tipo;
 
     /**
      * No args constructor for use in serialization
@@ -44,7 +47,7 @@ public class Campana {
      * @param contenido
      * @param idCampana
      */
-    public Campana(int idCampana, String titulo, String contenido, String fechaPublicacion, String fechaVencimiento, String estado, int idTipoCampana) {
+    public Campana(int idCampana, String titulo, String contenido, String fechaPublicacion, String fechaVencimiento, String estado, int idTipoCampana,String tipo) {
         super();
         this.idCampana = idCampana;
         this.titulo = titulo;
@@ -53,6 +56,7 @@ public class Campana {
         this.fechaVencimiento = fechaVencimiento;
         this.estado = estado;
         this.idTipoCampana = idTipoCampana;
+        this.tipo = tipo;
     }
 
     public int getIdCampana() {
@@ -109,6 +113,14 @@ public class Campana {
 
     public void setIdTipoCampana(int idTipoCampana) {
         this.idTipoCampana = idTipoCampana;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
 }

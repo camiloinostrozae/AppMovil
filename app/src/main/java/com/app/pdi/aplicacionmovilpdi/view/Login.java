@@ -1,6 +1,7 @@
 package com.app.pdi.aplicacionmovilpdi.view;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,7 +19,7 @@ public class Login extends AppCompatActivity implements LoginView {
 
     private EditText rut, password;
     private ProgressBar progressBar;
-
+    ActionBar actionBar;
     //Para mandar llamar al LoginPresenter , la interface
     private LoginPresenter presenter;
 
@@ -30,6 +31,8 @@ public class Login extends AppCompatActivity implements LoginView {
         rut=(EditText)findViewById(R.id.lrut);
         password=(EditText)findViewById(R.id.password);
         progressBar=(ProgressBar)findViewById(R.id.progressBar);
+        actionBar = getSupportActionBar();
+        actionBar.hide();
          //presenter implementado
         presenter = new LoginPresenterImpl(this);
         isAvailable();

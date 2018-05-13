@@ -5,6 +5,7 @@ import com.app.pdi.aplicacionmovilpdi.model.Object.Comuna;
 import com.app.pdi.aplicacionmovilpdi.model.Object.Region;
 import com.app.pdi.aplicacionmovilpdi.model.Object.Tramite;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
