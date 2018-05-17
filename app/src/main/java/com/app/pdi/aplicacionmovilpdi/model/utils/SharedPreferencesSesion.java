@@ -12,7 +12,7 @@ public class SharedPreferencesSesion {
     public static final String PREFERENCES_USER_NAME = "PREFERENCES_USER_NAME";
     public static final String PREFERENCES_USER_APELLIDO = "PREFERENCES_USER_APELLIDO";
     public static final String PREFERENCES_USER_AUTHKEY = "PREFERENCES_USER_AUTHKEY";
-    public static final String PREFERENCES_USER_RUT = "PREFERENCES_USER_EMAIL";
+    public static final String PREFERENCES_USER_RUT = "PREFERENCES_USER_RUT";
     public static final String PREFERENCES_USER_CONTRASENA = "PREFERENCES_USER_CONTRASENA";
 
     private final SharedPreferences preferences;

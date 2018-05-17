@@ -15,7 +15,9 @@
         android:layout_marginStart="51dp"
         android:layout_marginTop="12dp"
         android:onClick="ListarCampanas"
-        android:text="Campañas" />
+        android:text="Campañas"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="51dp" />
 
     <ImageButton
         android:id="@+id/img_btn_hablar"
