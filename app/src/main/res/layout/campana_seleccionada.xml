@@ -5,11 +5,27 @@
     android:layout_height="match_parent"
     >
 
-    <TextView
-        android:id="@+id/contenido_campana_seleccionada"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="" />
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <me.biubiubiu.justifytext.library.JustifyTextView
+                android:id="@+id/contenido_campana_seleccionada"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text=""
+                android:textSize="24sp" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
 </RelativeLayout>

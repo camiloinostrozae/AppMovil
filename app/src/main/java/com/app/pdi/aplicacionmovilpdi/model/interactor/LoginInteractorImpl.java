@@ -6,6 +6,7 @@ import com.app.pdi.aplicacionmovilpdi.model.interactor.interfaces.LoginInteracto
 import com.app.pdi.aplicacionmovilpdi.model.interactor.interfaces.OnLoginFinishListener;
 import com.app.pdi.aplicacionmovilpdi.model.service.InicioService;
 import com.app.pdi.aplicacionmovilpdi.model.service.PersonaService;
+import com.app.pdi.aplicacionmovilpdi.model.utils.SharedPreferencesSesion;
 import com.app.pdi.aplicacionmovilpdi.presenter.interfaces.LoginPresenter;
 
 import java.util.concurrent.TimeUnit;
@@ -20,7 +21,6 @@ public class LoginInteractorImpl implements LoginInteractor {
     private LoginPresenter presenter;
     private Retrofit retrofit;
     private InicioService personaService;
-
     public LoginInteractorImpl(LoginPresenter presenter){
         this.presenter = presenter;
         OkHttpClient okHttpClient = new OkHttpClient.Builder()

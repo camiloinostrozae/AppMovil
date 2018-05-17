@@ -60,7 +60,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
     //Barra de progreso
     private ProgressBar progressBar;
     private RegistroPresenter presenter;
-    private ActionBar actionBar;
+    private android.support.v7.app.ActionBar actionBar;
 
     //Para mostrar la fecha de nacimiento como calendario
     Calendar calendar;
@@ -99,7 +99,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
         //barra de progreso
         progressBar = (ProgressBar) findViewById(R.id.rProgressBar);
 
-        actionBar  = getActionBar();
+        actionBar  = getSupportActionBar();
         actionBar.hide();
 
         //Instanciamos el calendario que se mostrará en la fecha de nacimiento

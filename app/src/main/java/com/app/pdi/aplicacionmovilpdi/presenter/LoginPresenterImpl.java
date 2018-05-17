@@ -5,6 +5,7 @@ import com.app.pdi.aplicacionmovilpdi.model.Object.Persona;
 import com.app.pdi.aplicacionmovilpdi.model.interactor.LoginInteractorImpl;
 import com.app.pdi.aplicacionmovilpdi.model.interactor.interfaces.LoginInteractor;
 import com.app.pdi.aplicacionmovilpdi.model.utils.NetworkState;
+import com.app.pdi.aplicacionmovilpdi.model.utils.SharedPreferencesSesion;
 import com.app.pdi.aplicacionmovilpdi.presenter.interfaces.LoginPresenter;
 import com.app.pdi.aplicacionmovilpdi.view.interfaces.LoginView;
 import com.app.pdi.aplicacionmovilpdi.model.interactor.interfaces.OnLoginFinishListener;
@@ -17,6 +18,7 @@ public class LoginPresenterImpl implements LoginPresenter, OnLoginFinishListener
     //Se declaran las interfaces de vista e interactor
     private LoginView view;
     private LoginInteractor interactor;
+    private SharedPreferencesSesion preferencesSesion;
     String resultado;
     public LoginPresenterImpl(LoginView view){
         this.view = view;
@@ -49,6 +51,7 @@ public class LoginPresenterImpl implements LoginPresenter, OnLoginFinishListener
                             if (response.isSuccessful()) {
                                 InicioSesion inicio = response.body();
                                 if (inicio.isEstado()) {
+
                                     view.loginSuccess();
                                     view.showProgress(false);
                                 } else if (inicio.getCodigo() == 1) {
@@ -139,9 +142,7 @@ public class LoginPresenterImpl implements LoginPresenter, OnLoginFinishListener
             rut = rut.replace(".", "");
             rut = rut.replace("-", "");
             int rutAux = Integer.parseInt(rut.substring(0, rut.length() - 1));
-
             char dv = rut.charAt(rut.length() - 1);
-
             int m = 0, s = 1;
             for (; rutAux != 0; rutAux /= 10) {
                 s = (s + rutAux % 10 * (9 - m++ % 6)) % 11;
