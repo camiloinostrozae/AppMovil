@@ -1,5 +1,6 @@
 package com.app.pdi.aplicacionmovilpdi.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -65,7 +66,8 @@ public class Login extends AppCompatActivity implements LoginView {
     public void loginSuccess() {
         Intent intent = new Intent(this,PrincipalActivity.class);
         startActivity(intent);
-
+        //Para no permitir regresar al login con el boton de vuelta atrás
+        finish();
     }
 
 
@@ -96,6 +98,11 @@ public class Login extends AppCompatActivity implements LoginView {
         Toast.makeText(Login.this,mensaje,Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public Context getContext() {
+        return this;
+    }
+
     //botón "iniciar sesion del el login"
     public void validacion(View view){
 
@@ -112,6 +119,8 @@ public class Login extends AppCompatActivity implements LoginView {
             Toast.makeText(Login.this,"SIN CONEXIÓN",Toast.LENGTH_SHORT).show();
         }
     }
+
+
 
 
 }

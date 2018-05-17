@@ -27,4 +27,14 @@
         android:layout_marginBottom="247dp"
         android:text="Campañas"
         android:onClick="ListarCampanas"/>
+
+    <Button
+        android:id="@+id/prueba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="200dp"
+        android:text="Prueba"
+        android:onClick="Prueba"/>
 </RelativeLayout>

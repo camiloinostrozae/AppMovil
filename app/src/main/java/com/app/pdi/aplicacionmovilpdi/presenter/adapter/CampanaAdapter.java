@@ -37,14 +37,16 @@ public class CampanaAdapter extends RecyclerView.Adapter<CampanaAdapter.CampanaV
 
     @Override
     public void onBindViewHolder(CampanaViewHolder holder, final int position) {
-        holder.titulo_campana.setText(lista.get(position).getTitulo());
-        holder.tipo_campana.setText(lista.get(position).getTipo());
+        //Se establece lo que se mostrará en el ReccyclerView
+        holder.titulo_campana.setText("Titulo: " + lista.get(position).getTitulo());
+        holder.tipo_campana.setText("Tipo: " + lista.get(position).getTipo());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent =  new Intent(context, ContenidoCampanaSeleccionada.class);
-                //Se pasa a través de la activite el contenido de la campana que se verá solo en otra activity
+                //Se pasa a través de la activite el contenido y titulo de la campana que se verá solo en otra activity
+                intent.putExtra("titulo_campana",lista.get(position).getTitulo());
                 intent.putExtra("contenido_campana", lista.get(position).getContenido());
                 context.startActivity(intent);
             }
