@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/contenido_campana_seleccionada"
-        android:layout_width="match_parent"
+        android:layout_width="334dp"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
