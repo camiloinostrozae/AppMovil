@@ -31,25 +31,24 @@ import java.util.List;
 import java.util.Locale;
 import java.util.zip.Inflater;
 
-public class ListarCampanasActivity extends AppCompatActivity implements CampanaContract.viewCampanas/**,
-        TextToSpeech.OnInitListener*/{
+public class ListarCampanasActivity extends AppCompatActivity implements CampanaContract.viewCampanas,
+        TextToSpeech.OnInitListener{
 
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
     private CampanaContract.presenter presenter;
     private ActionBar actionBar;
-/**
+
     private TextToSpeech tts;
+    private TextToSpeech tts2;
     private TextView etx;
-    private TextView etx2;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_campanas);
-        //tts = new TextToSpeech(this, this);
-       // etx2 = findViewById(R.id.tipo_campana);
-       //etx = findViewById(R.id.recycler_campana);
+        tts = new TextToSpeech(this, this);
+        tts2 = new TextToSpeech(this, this);
         inicializarRecyclerView();
         initProgressBar();
         presenter = new getCampanasPresenterImpl(this, new getCampanasInteractorImpl());
@@ -101,7 +100,7 @@ public class ListarCampanasActivity extends AppCompatActivity implements Campana
 
     @Override
     public void setDataToRecyclerView(List<Campana> campanaArrayList) {
-        CampanaAdapter adapter = new CampanaAdapter(campanaArrayList,recyclerCampanaClickListener,this);
+        CampanaAdapter adapter = new CampanaAdapter((ArrayList<Campana>) campanaArrayList,recyclerCampanaClickListener,this);
         recyclerView.setAdapter(adapter);
 
     }
@@ -135,7 +134,7 @@ public class ListarCampanasActivity extends AppCompatActivity implements Campana
     }
 
 
-    /**@Override
+    @Override
     public void onInit(int status) {
 
         if(status==TextToSpeech.SUCCESS){
@@ -143,18 +142,28 @@ public class ListarCampanasActivity extends AppCompatActivity implements Campana
             if(result==TextToSpeech.LANG_NOT_SUPPORTED || result==TextToSpeech.LANG_MISSING_DATA){
                 Log.e("TTS","Este lenguaje no es soportado");
             }else{
-                speakOut();
+                getIntentFromRecycler();
             }
         }else{
             Log.e("TTS","Inicializacion del lenguaje es fallida");
         }
     }
 
-    private void speakOut() {
+    private void speakOutCampañas(String titulo,String tipo){
+         tts.speak(titulo,TextToSpeech.QUEUE_FLUSH,null);
+         tts2.speak(tipo,TextToSpeech.QUEUE_FLUSH,null);
+    }
 
-        String text = etx.getText().toString();
-        tts.speak(text,TextToSpeech.QUEUE_FLUSH,null);
-    }*/
+
+    private void getIntentFromRecycler() {
+        //Obtengo los Intent que vienen de CampanaAdaptaer, especificamente, los que vienen de  itemView.setOnClickListener
+        if (getIntent().hasExtra("tipo_campana") && getIntent().hasExtra("titulo_campana")) {
+            String tipo = getIntent().getStringExtra("tipo_campana");
+            String titulo = getIntent().getStringExtra("titulo_campana");
+            speakOutCampañas(titulo,tipo);
+        }
+
+    }
 
 
 

@@ -1,5 +1,7 @@
 package com.app.pdi.aplicacionmovilpdi.view.interfaces;
 
+import android.content.Context;
+
 public interface LoginView {
 
     void showProgress(boolean progreso);
@@ -11,4 +13,5 @@ public interface LoginView {
     void setPassNoExist();
     void setErrorRutNoExiste();
     void setErrorConexion(String mensaje);
+    Context getContext();
 }

@@ -61,4 +61,8 @@ public class SharedPreferencesSesion {
         editor.putString(PREFERENCES_USER_CONTRASENA,null);
         editor.apply();
     }
+
+    public String getPreferencesUserApellido(){
+        return preferences.getString(PREFERENCES_USER_APELLIDO,null);
+    }
 }

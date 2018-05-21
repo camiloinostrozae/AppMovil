@@ -29,7 +29,7 @@ public class LoginInteractorImpl implements LoginInteractor {
                 .writeTimeout(30,TimeUnit.SECONDS)
                 .build();
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.88.23/proyectotitulo/web/service/") //desde el celu usar la 192.168.0.16
+                .baseUrl("http://192.168.1.33/proyectotitulo/web/service/") //desde el celu usar la 192.168.0.16
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

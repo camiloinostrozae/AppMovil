@@ -17,6 +17,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <TextView
+                android:id="@+id/titulo_campana_seleccionada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24dp"
+                android:padding="8dp"/>
+
             <me.biubiubiu.justifytext.library.JustifyTextView
                 android:id="@+id/contenido_campana_seleccionada"
                 android:layout_width="match_parent"
@@ -25,6 +32,17 @@
                 android:layout_centerHorizontal="true"
                 android:text=""
                 android:textSize="24sp" />
+            <ImageButton
+                android:id="@+id/btnStop"
+                android:layout_width="match_parent"
+                android:layout_height="1000dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="#00ffffff"
+                app:srcCompat="?android:attr/actionBarItemBackground"
+                android:layout_alignParentLeft="true"
+                />
+
 
         </RelativeLayout>
 

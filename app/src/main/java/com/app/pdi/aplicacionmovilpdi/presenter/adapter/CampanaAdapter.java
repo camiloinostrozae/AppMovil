@@ -3,6 +3,7 @@ package com.app.pdi.aplicacionmovilpdi.presenter.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,42 +14,59 @@ import com.app.pdi.aplicacionmovilpdi.R;
 import com.app.pdi.aplicacionmovilpdi.model.Object.Campana;
 import com.app.pdi.aplicacionmovilpdi.model.interactor.interfaces.RecyclerCampanaClickListener;
 import com.app.pdi.aplicacionmovilpdi.view.ContenidoCampanaSeleccionada;
+import com.app.pdi.aplicacionmovilpdi.view.ListarCampanasActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CampanaAdapter extends RecyclerView.Adapter<CampanaAdapter.CampanaViewHolder>{
 
-    private List<Campana> lista;
+    private ArrayList<Campana> lista;
     private RecyclerCampanaClickListener recyclerCampanaClickListener;
     Context context;
-    public CampanaAdapter(List<Campana> lista, RecyclerCampanaClickListener recyclerCampanaClickListener, Context context){
+    public CampanaAdapter(ArrayList<Campana> lista, RecyclerCampanaClickListener recyclerCampanaClickListener, Context context){
         this.lista = lista;
         this.recyclerCampanaClickListener = recyclerCampanaClickListener;
         this.context = context;
     }
 
-    @Override
-    public CampanaViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType){
-        LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View view = inflater.inflate(R.layout.contenido_campanas, viewGroup, false);
-        return new CampanaViewHolder(view);
-    }
+
+@Override
+public CampanaViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType){
+    LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
+    View view = inflater.inflate(R.layout.contenido_campanas, viewGroup, false);
+    return new CampanaViewHolder(view);
+}
 
     @Override
     public void onBindViewHolder(CampanaViewHolder holder, final int position) {
-        holder.titulo_campana.setText(lista.get(position).getTitulo());
-        holder.tipo_campana.setText(lista.get(position).getTipo());
-
+        //Se establece lo que se mostrará en el ReccyclerView
+        holder.titulo_campana.setText("Título: " + lista.get(position).getTitulo());
+        holder.tipo_campana.setText("Tipo: " + lista.get(position).getTipo());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =  new Intent(context, ContenidoCampanaSeleccionada.class);
-                //Se pasa a través de la activite el contenido de la campana que se verá solo en otra activity
-                intent.putExtra("contenido_campana", lista.get(position).getContenido());
+                Intent intent =  new Intent(context, ListarCampanasActivity.class);
+                //Se pasa a través de la activite el contenido y titulo de la campana que se verá solo en otra activity
+                intent.putExtra("titulo_campana",lista.get(position).getTitulo());
+                intent.putExtra("tipo_campana", lista.get(position).getTipo());
                 context.startActivity(intent);
             }
         });
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Intent intent =  new Intent(context, ContenidoCampanaSeleccionada.class);
+                //Se pasa a través de la activite el contenido y titulo de la campana que se verá solo en otra activity
+                intent.putExtra("titulo_campana",lista.get(position).getTitulo());
+                intent.putExtra("contenido_campana", lista.get(position).getContenido());
+                context.startActivity(intent);
+                return false;
+            }
+        });
+
+
     }
 
     @Override
@@ -64,7 +82,6 @@ public class CampanaAdapter extends RecyclerView.Adapter<CampanaAdapter.CampanaV
             super(itemView);
             titulo_campana = itemView.findViewById(R.id.titulo_campana);
             tipo_campana = itemView.findViewById(R.id.tipo_campana);
-
         }
     }
 

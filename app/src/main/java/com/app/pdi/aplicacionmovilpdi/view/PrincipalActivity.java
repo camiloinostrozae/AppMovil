@@ -21,8 +21,18 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import android.widget.Button;
+import android.widget.Toast;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+
 
 import com.app.pdi.aplicacionmovilpdi.R;
+import com.app.pdi.aplicacionmovilpdi.model.Object.InicioSesion;
+import com.app.pdi.aplicacionmovilpdi.model.utils.SharedPreferencesSesion;
 
 public class PrincipalActivity extends AppCompatActivity implements
 
@@ -33,6 +43,10 @@ public class PrincipalActivity extends AppCompatActivity implements
     TextView grabar;
     private static final int RECOGNIZE_SPEECH_ACTIVITY = 1;
     private ActionBar actionBar;
+    InicioSesion sesion;
+    private Button boton;
+    public static int MILISEGUNDOS_ESPERA = 2000;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +57,8 @@ public class PrincipalActivity extends AppCompatActivity implements
         //Para que la barra de herramientas no muestre el titulo de la app
         actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
+        sesion = new InicioSesion();
+
     }
 
     @Override
@@ -63,9 +79,15 @@ public class PrincipalActivity extends AppCompatActivity implements
                     if(grabar.getText().equals("campañas") || grabar.getText().equals("campaña")){
                         Intent intent = new Intent(this,ListarCampanasActivity.class);
                         startActivity(intent);
+                    }else{
+                        speakOutReintento();
                     }
 
+                }else{
+                    if(data ==null){
+                        speakOutFallo();
                     }
+                }
 
 
                 break;
@@ -80,9 +102,24 @@ public class PrincipalActivity extends AppCompatActivity implements
         startActivity(intent);
     }
 
+
     public void onClickImgBtnHablar(View v) {
 
         speakOut2();
+        esperar(MILISEGUNDOS_ESPERA);
+    }
+
+    public void esperar(int milisegundos) {
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                escuchar();
+            }
+        }, milisegundos);
+    }
+
+    public void escuchar(){
         Intent intentActionRecognizeSpeech = new Intent(
                 RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 
@@ -97,7 +134,6 @@ public class PrincipalActivity extends AppCompatActivity implements
                     "Tú dispositivo no soporta el reconocimiento por voz",
                     Toast.LENGTH_SHORT).show();
         }
-
     }
 
     @Override
@@ -124,6 +160,23 @@ public class PrincipalActivity extends AppCompatActivity implements
     private void speakOut2() {
 
         String text = "Si quiere ver las campañas diga, Campañas";
-        tts.speak(text,TextToSpeech.QUEUE_FLUSH,null);
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
+
+    private void speakOutFallo() {
+
+        String text = "No entendí, por favor intente nuevamente";
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+    }
+
+    private void speakOutReintento() {
+
+        String text = "Intente nuevamente";
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+    }
+
+    public void Prueba(View view){
+        String apellido = SharedPreferencesSesion.get(this).getPreferencesUserApellido();
+        Toast.makeText(PrincipalActivity.this,"jola " + apellido,Toast.LENGTH_SHORT).show();
+      }
 }

@@ -51,7 +51,7 @@ public class LoginPresenterImpl implements LoginPresenter, OnLoginFinishListener
                             if (response.isSuccessful()) {
                                 InicioSesion inicio = response.body();
                                 if (inicio.isEstado()) {
-
+                                    SharedPreferencesSesion.get(view.getContext()).guardarPersona(response.body());
                                     view.loginSuccess();
                                     view.showProgress(false);
                                 } else if (inicio.getCodigo() == 1) {
