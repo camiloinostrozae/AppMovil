@@ -45,7 +45,7 @@ public class PrincipalActivity extends AppCompatActivity implements
     private ActionBar actionBar;
     InicioSesion sesion;
     private Button boton;
-    public static int MILISEGUNDOS_ESPERA = 2000;
+    public static int MILISEGUNDOS_ESPERA = 5000;
 
 
     @Override
@@ -76,7 +76,7 @@ public class PrincipalActivity extends AppCompatActivity implements
 
                     grabar.setText(strSpeech2Text);
 
-                    if(grabar.getText().equals("campañas") || grabar.getText().equals("campaña")){
+                    if(grabar.getText().equals("ver campañas")){
                         Intent intent = new Intent(this,ListarCampanasActivity.class);
                         startActivity(intent);
                     }else{
@@ -84,7 +84,7 @@ public class PrincipalActivity extends AppCompatActivity implements
                     }
 
                 }else{
-                    if(data ==null){
+                    if(data == null){
                         speakOutFallo();
                     }
                 }
@@ -159,7 +159,7 @@ public class PrincipalActivity extends AppCompatActivity implements
 
     private void speakOut2() {
 
-        String text = "Si quiere ver las campañas diga, Campañas";
+        String text = "Si quiere ver las campañas diga, ver campañas, si quiere ver los trámites diga, ver trámites";
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 

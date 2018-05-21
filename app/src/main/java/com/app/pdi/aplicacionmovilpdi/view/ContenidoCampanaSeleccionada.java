@@ -69,7 +69,7 @@ public class ContenidoCampanaSeleccionada extends AppCompatActivity  implements
 
         String text = etx.getText().toString();
         tts.setSpeechRate((float) 0.9);//define la velocidad del relato x defecto 1.0
-        //tts.setPitch((float) 1.1);//define el tomo del relato x defecto 1.0
+        //tts.setPitch((float) 1.1);//define el tono del relato x defecto 1.0
         tts.speak(text,TextToSpeech.QUEUE_FLUSH,null);
     }
 
@@ -107,7 +107,6 @@ public class ContenidoCampanaSeleccionada extends AppCompatActivity  implements
         TextView contenido = findViewById(R.id.contenido_campana_seleccionada);
         contenido.setText(contenidoIntent);
     }
-
 
 
     @Override

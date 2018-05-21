@@ -40,15 +40,12 @@ public class ListarCampanasActivity extends AppCompatActivity implements Campana
     private ActionBar actionBar;
 
     private TextToSpeech tts;
-    private TextToSpeech tts2;
-    private TextView etx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_campanas);
         tts = new TextToSpeech(this, this);
-        tts2 = new TextToSpeech(this, this);
         inicializarRecyclerView();
         initProgressBar();
         presenter = new getCampanasPresenterImpl(this, new getCampanasInteractorImpl());
@@ -142,29 +139,21 @@ public class ListarCampanasActivity extends AppCompatActivity implements Campana
             if(result==TextToSpeech.LANG_NOT_SUPPORTED || result==TextToSpeech.LANG_MISSING_DATA){
                 Log.e("TTS","Este lenguaje no es soportado");
             }else{
-                getIntentFromRecycler();
+                speakOut();
+
             }
         }else{
             Log.e("TTS","Inicializacion del lenguaje es fallida");
         }
     }
 
-    private void speakOutCampañas(String titulo,String tipo){
-         tts.speak(titulo,TextToSpeech.QUEUE_FLUSH,null);
-         tts2.speak(tipo,TextToSpeech.QUEUE_FLUSH,null);
-    }
+    private void speakOut(){
 
-
-    private void getIntentFromRecycler() {
-        //Obtengo los Intent que vienen de CampanaAdaptaer, especificamente, los que vienen de  itemView.setOnClickListener
-        if (getIntent().hasExtra("tipo_campana") && getIntent().hasExtra("titulo_campana")) {
-            String tipo = getIntent().getStringExtra("tipo_campana");
-            String titulo = getIntent().getStringExtra("titulo_campana");
-            speakOutCampañas(titulo,tipo);
-        }
+        String texto = "Lista de campañas disponibles, si desea saber el título y el tipo de la campaña " +
+                "presione una vez sobre el elemento. si desea saber su contenido mantenga presionado el elemento";
+         tts.speak(texto,TextToSpeech.QUEUE_FLUSH,null);
 
     }
-
 
 
 }

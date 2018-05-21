@@ -22,7 +22,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="24dp"
-                android:padding="8dp"/>
+                android:padding="8dp"
+                android:visibility="invisible" />
 
             <me.biubiubiu.justifytext.library.JustifyTextView
                 android:id="@+id/contenido_campana_seleccionada"
@@ -35,13 +36,13 @@
             <ImageButton
                 android:id="@+id/btnStop"
                 android:layout_width="match_parent"
-                android:layout_height="1000dp"
+                android:layout_height="2000dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:background="#00ffffff"
                 app:srcCompat="?android:attr/actionBarItemBackground"
                 android:layout_alignParentLeft="true"
-                />
+                android:onClick="botonDetener"/>
 
 
         </RelativeLayout>
