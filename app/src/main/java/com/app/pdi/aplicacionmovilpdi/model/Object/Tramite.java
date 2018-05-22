@@ -25,6 +25,9 @@ public class Tramite {
     @SerializedName("id_tipo_tramite")
     @Expose
     private int idTipoTramite;
+    @SerializedName("tipo")
+    @Expose
+    private String tipo;
 
     /**
      * No args constructor for use in serialization
@@ -43,7 +46,7 @@ public class Tramite {
      * @param contenido
      * @param idTramite
      */
-    public Tramite(int idTramite, String titulo, String contenido, String fechaPublicacion, String fechaVencimiento, String estado, int idTipoTramite) {
+    public Tramite(int idTramite, String titulo, String contenido, String fechaPublicacion, String fechaVencimiento, String estado, int idTipoTramite,String tipo) {
         super();
         this.idTramite = idTramite;
         this.titulo = titulo;
@@ -52,6 +55,7 @@ public class Tramite {
         this.fechaVencimiento = fechaVencimiento;
         this.estado = estado;
         this.idTipoTramite = idTipoTramite;
+        this.tipo = tipo;
     }
 
     public int getIdTramite() {
@@ -108,6 +112,14 @@ public class Tramite {
 
     public void setIdTipoTramite(int idTipoTramite) {
         this.idTipoTramite = idTipoTramite;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
 }
