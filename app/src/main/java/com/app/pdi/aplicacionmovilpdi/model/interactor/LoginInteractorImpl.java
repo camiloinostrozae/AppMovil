@@ -7,6 +7,7 @@ import com.app.pdi.aplicacionmovilpdi.model.interactor.interfaces.OnLoginFinishL
 import com.app.pdi.aplicacionmovilpdi.model.service.InicioService;
 import com.app.pdi.aplicacionmovilpdi.model.service.PersonaService;
 import com.app.pdi.aplicacionmovilpdi.model.utils.SharedPreferencesSesion;
+import com.app.pdi.aplicacionmovilpdi.model.utils.Urls;
 import com.app.pdi.aplicacionmovilpdi.presenter.interfaces.LoginPresenter;
 
 import java.util.concurrent.TimeUnit;
@@ -29,7 +30,7 @@ public class LoginInteractorImpl implements LoginInteractor {
                 .writeTimeout(30,TimeUnit.SECONDS)
                 .build();
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.3.2/ProyectoTitulo/web/service/") //desde el celu usar la 192.168.0.16
+                .baseUrl("http://10.0.3.2/proyectotitulo/web/service/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

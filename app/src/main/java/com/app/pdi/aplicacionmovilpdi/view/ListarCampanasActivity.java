@@ -13,6 +13,11 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+
+import android.widget.TextView;
+import android.speech.tts.TextToSpeech;
+import android.util.Log;
+
 import com.app.pdi.aplicacionmovilpdi.R;
 import com.app.pdi.aplicacionmovilpdi.model.Object.Campana;
 import com.app.pdi.aplicacionmovilpdi.model.interactor.interfaces.CampanaContract;
@@ -23,17 +28,24 @@ import com.app.pdi.aplicacionmovilpdi.presenter.getCampanasPresenterImpl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.zip.Inflater;
 
-public class ListarCampanasActivity extends AppCompatActivity implements CampanaContract.viewCampanas{
+public class ListarCampanasActivity extends AppCompatActivity implements CampanaContract.viewCampanas,
+        TextToSpeech.OnInitListener{
 
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
     private CampanaContract.presenter presenter;
     private ActionBar actionBar;
+
+    private TextToSpeech tts;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_campanas);
+        tts = new TextToSpeech(this, this);
         inicializarRecyclerView();
         initProgressBar();
         presenter = new getCampanasPresenterImpl(this, new getCampanasInteractorImpl());
@@ -41,6 +53,8 @@ public class ListarCampanasActivity extends AppCompatActivity implements Campana
         //Para ocultar el menú de la barra
         actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
+
+
     }
 
 
@@ -83,7 +97,7 @@ public class ListarCampanasActivity extends AppCompatActivity implements Campana
 
     @Override
     public void setDataToRecyclerView(List<Campana> campanaArrayList) {
-        CampanaAdapter adapter = new CampanaAdapter(campanaArrayList,recyclerCampanaClickListener,this);
+        CampanaAdapter adapter = new CampanaAdapter((ArrayList<Campana>) campanaArrayList,recyclerCampanaClickListener,this);
         recyclerView.setAdapter(adapter);
 
     }
@@ -117,6 +131,29 @@ public class ListarCampanasActivity extends AppCompatActivity implements Campana
     }
 
 
+    @Override
+    public void onInit(int status) {
+
+        if(status==TextToSpeech.SUCCESS){
+            int result = tts.setLanguage(Locale.getDefault());
+            if(result==TextToSpeech.LANG_NOT_SUPPORTED || result==TextToSpeech.LANG_MISSING_DATA){
+                Log.e("TTS","Este lenguaje no es soportado");
+            }else{
+                speakOut();
+
+            }
+        }else{
+            Log.e("TTS","Inicializacion del lenguaje es fallida");
+        }
+    }
+
+    private void speakOut(){
+
+        String texto = "Lista de campañas disponibles, si desea saber el título y el tipo de la campaña " +
+                "presione una vez sobre el elemento. si desea saber su contenido mantenga presionado el elemento";
+         tts.speak(texto,TextToSpeech.QUEUE_FLUSH,null);
+
+    }
 
 
 }

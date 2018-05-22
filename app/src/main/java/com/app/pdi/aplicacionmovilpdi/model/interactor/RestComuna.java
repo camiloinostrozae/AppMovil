@@ -1,6 +1,7 @@
 package com.app.pdi.aplicacionmovilpdi.model.interactor;
 
 import com.app.pdi.aplicacionmovilpdi.model.service.ObtenerDatosService;
+import com.app.pdi.aplicacionmovilpdi.model.utils.Urls;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,7 +22,7 @@ public class RestComuna {
                     .writeTimeout(60,TimeUnit.SECONDS)
                     .build();
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://10.0.3.2/ProyectoTitulo/web/services/service-comuna/")
+                    .baseUrl("http://"+ Urls.direccionGenimotion+"/proyectotitulo/web/services/service-comuna/")
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

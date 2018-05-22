@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import com.app.pdi.aplicacionmovilpdi.R;
 import com.app.pdi.aplicacionmovilpdi.model.utils.NetworkState;
+import com.app.pdi.aplicacionmovilpdi.model.utils.SharedPreferencesSesion;
 import com.app.pdi.aplicacionmovilpdi.presenter.interfaces.LoginPresenter;
 import com.app.pdi.aplicacionmovilpdi.view.interfaces.LoginView;
 import com.app.pdi.aplicacionmovilpdi.presenter.LoginPresenterImpl;
@@ -23,12 +25,17 @@ public class Login extends AppCompatActivity implements LoginView {
     ActionBar actionBar;
     //Para mandar llamar al LoginPresenter , la interface
     private LoginPresenter presenter;
+    //variable del tipo SharedPreferencesSesion que servirá mantener la sesión activa
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(SharedPreferencesSesion.get(this).isLogged()){
+          Intent intent = new Intent(this, PrincipalActivity.class);
+          startActivity(intent);
+            Log.e("dato","siasidaisdiasd");
+        }
         setContentView(R.layout.login);
-
         rut=(EditText)findViewById(R.id.lrut);
         password=(EditText)findViewById(R.id.password);
         progressBar=(ProgressBar)findViewById(R.id.progressBar);

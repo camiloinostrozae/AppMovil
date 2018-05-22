@@ -6,6 +6,7 @@ import android.util.Log;
 import com.app.pdi.aplicacionmovilpdi.model.Object.Campana;
 import com.app.pdi.aplicacionmovilpdi.model.interactor.interfaces.CampanaContract;
 import com.app.pdi.aplicacionmovilpdi.model.service.ObtenerDatosService;
+import com.app.pdi.aplicacionmovilpdi.model.utils.Urls;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class getCampanasInteractorImpl implements CampanaContract.getCampanasInt
                 .writeTimeout(60,TimeUnit.SECONDS)
                 .build();
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.3.2/ProyectoTitulo/web/services/service-campana/")
+                .baseUrl("http://"+ Urls.direccionGenimotion+"/proyectotitulo/web/services/service-campana/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

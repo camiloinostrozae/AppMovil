@@ -12,37 +12,37 @@
 
     <EditText
         android:id="@+id/lrut"
+        style="@android:style/Widget.EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="121dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="175dp"
         android:drawableLeft="@drawable/ic_person_black_24dp"
         android:drawablePadding="8dp"
         android:ems="10"
-        android:hint="Ingrese su R.U.N"
+        android:hint="Ingrese su Rut"
         android:inputType="text"
         android:padding="10dp"
-        style="@android:style/Widget.EditText"
-        android:textColorHint="#fff"
-        android:layout_alignParentLeft="true" />
+        android:textColor="#fff"
+        android:textColorHint="#fff" />
 
 
     <EditText
         android:id="@+id/password"
+        style="@android:style/Widget.EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="213dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
         android:drawableLeft="@drawable/ic_lock_black_24dp"
         android:drawablePadding="8dp"
         android:ems="10"
-        android:hint="Ingrese su contraseña"
-        style="@android:style/Widget.EditText"
+        android:hint=" Ingrese su contraseña"
         android:inputType="textPassword"
+        android:textColor="#fff"
         android:textColorHint="#fff"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentRight="true" />
 
 
     <Button
@@ -52,9 +52,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="171dp"
+        android:layout_marginBottom="168dp"
+        android:background="#ffffff"
         android:onClick="validacion"
-        android:text="Iniciar Sesión" />
+        android:text="Iniciar Sesión"
+        android:textColor="#111111" />
 
 
     <ProgressBar
@@ -65,16 +67,29 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:visibility="gone"
-        android:layout_marginBottom="45dp" />
+        android:layout_marginBottom="45dp"
+        />
 
     <Button
         android:id="@+id/registro"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="98dp"
-        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="104dp"
+        android:background="#ffffff"
+        android:onClick="irRegistro"
         android:text="registrarse"
-        android:onClick="irRegistro"/>
+        android:textColor="#111111"
+        android:layout_alignParentLeft="true" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="277dp"
+        android:layout_height="106dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        app:srcCompat="@drawable/pdi" />
 </RelativeLayout>
