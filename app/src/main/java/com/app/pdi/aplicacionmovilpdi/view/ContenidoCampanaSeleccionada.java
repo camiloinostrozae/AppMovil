@@ -2,6 +2,7 @@ package com.app.pdi.aplicacionmovilpdi.view;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
@@ -22,11 +23,16 @@ public class ContenidoCampanaSeleccionada extends AppCompatActivity  implements
          TextView etx;
          ImageButton botonDetener;
          public static int MILISEGUNDOS_ESPERA = 5000;
+    private ActionBar actionBar;
 
         @Override
         protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.campana_seleccionada);
+
+        //Para que la barra de herramientas no muestre el titulo de la app
+            actionBar = getSupportActionBar();
+            actionBar.setDisplayShowTitleEnabled(false);
 
         tts = new TextToSpeech(this, this);
         etx = findViewById(R.id.contenido_campana_seleccionada);
@@ -45,6 +51,7 @@ public class ContenidoCampanaSeleccionada extends AppCompatActivity  implements
             });
 
         getIntentFromRecycler();
+
 
     }
 

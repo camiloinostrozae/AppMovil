@@ -76,7 +76,7 @@ public class PrincipalActivity extends AppCompatActivity implements
 
                     grabar.setText(strSpeech2Text);
 
-                    if(grabar.getText().equals("ver campañas")){
+                    if(grabar.getText().equals("campañas") || grabar.getText().equals("campaña")){
                         Intent intent = new Intent(this,ListarCampanasActivity.class);
                         startActivity(intent);
                     }else{
@@ -159,7 +159,7 @@ public class PrincipalActivity extends AppCompatActivity implements
 
     private void speakOut2() {
 
-        String text = "Si quiere ver las campañas diga, ver campañas, si quiere ver los trámites diga, ver trámites";
+        String text = "Si quiere conocer las campañas diga, campañas, si quiere conocer los trámites diga, trámites";
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 
