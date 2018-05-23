@@ -57,6 +57,23 @@
             </intent-filter>
 
         </activity>
+
+        <activity android:name=".view.ListarTramitesActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.LISTARTRAMITEACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".view.ContenidoTramiteSeleccionado">
+            <intent-filter>
+                <action android:name="android.intent.action.CONTENIDOTRAMITESELECCIONADO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>

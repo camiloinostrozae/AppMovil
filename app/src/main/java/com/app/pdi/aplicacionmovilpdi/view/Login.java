@@ -30,10 +30,15 @@ public class Login extends AppCompatActivity implements LoginView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*Comprobamos si el usuario ya se encuentra logueado en la app
+        * si es verdadero, lo mandamos directamente a la actividad principal
+        * sino es así, el login se carga normalmente.*/
         if(SharedPreferencesSesion.get(this).isLogged()){
           Intent intent = new Intent(this, PrincipalActivity.class);
           startActivity(intent);
-            Log.e("dato","siasidaisdiasd");
+          /*finish es para que una vez en PrincipalActivity, no pueda volver al login si
+            es que llegua a presionar el boton  de volver atrás*/
+          finish();
         }
         setContentView(R.layout.login);
         rut=(EditText)findViewById(R.id.lrut);
@@ -122,8 +127,10 @@ public class Login extends AppCompatActivity implements LoginView {
     }
 
     public  void isAvailable(){
-        if(NetworkState.getInstance().estadoConexion(this)){
+        if(!NetworkState.getInstance().estadoConexion(this)){
             Toast.makeText(Login.this,"SIN CONEXIÓN",Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(Login.this,"Si tenemos conexión",Toast.LENGTH_SHORT).show();
         }
     }
 

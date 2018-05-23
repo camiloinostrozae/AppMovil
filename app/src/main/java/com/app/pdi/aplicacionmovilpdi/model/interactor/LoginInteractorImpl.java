@@ -30,7 +30,7 @@ public class LoginInteractorImpl implements LoginInteractor {
                 .writeTimeout(30,TimeUnit.SECONDS)
                 .build();
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.3.2/proyectotitulo/web/service/")
+                .baseUrl("http://"+Urls.direccionGenimotion+"/web/service/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

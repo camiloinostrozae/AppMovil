@@ -80,7 +80,12 @@ public class PrincipalActivity extends AppCompatActivity implements
                         Intent intent = new Intent(this,ListarCampanasActivity.class);
                         startActivity(intent);
                     }else{
-                        speakOutReintento();
+                        if(grabar.getText().equals("trámites") || grabar.getText().equals("trámite")){
+                            Intent intent = new Intent(this,ListarTramitesActivity.class);
+                            startActivity(intent);
+                        }else {
+                            speakOutReintento();
+                        }
                     }
 
                 }else{
@@ -99,6 +104,11 @@ public class PrincipalActivity extends AppCompatActivity implements
 
     public void ListarCampanas(View view){
         Intent intent = new Intent(this,ListarCampanasActivity.class);
+        startActivity(intent);
+    }
+
+    public void ListarTramites(View view){
+        Intent intent = new Intent(this,ListarTramitesActivity.class);
         startActivity(intent);
     }
 

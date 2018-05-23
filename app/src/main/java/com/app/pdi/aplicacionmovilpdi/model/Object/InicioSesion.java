@@ -1,6 +1,9 @@
 package com.app.pdi.aplicacionmovilpdi.model.Object;
 
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class InicioSesion {
 
     private int codigo;
@@ -10,6 +13,8 @@ public class InicioSesion {
     private String apellido;
     private String rut;
     private String contrasena;
+    @SerializedName("auth_key")
+    @Expose
     private String authKey;
 
     /**

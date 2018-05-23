@@ -3,8 +3,8 @@ package com.app.pdi.aplicacionmovilpdi.model.interactor;
 import android.content.Context;
 import android.util.Log;
 
-import com.app.pdi.aplicacionmovilpdi.model.Object.Campana;
-import com.app.pdi.aplicacionmovilpdi.model.interactor.interfaces.CampanaContract;
+import com.app.pdi.aplicacionmovilpdi.model.Object.Tramite;
+import com.app.pdi.aplicacionmovilpdi.model.interactor.interfaces.TramiteContract;
 import com.app.pdi.aplicacionmovilpdi.model.service.ObtenerDatosService;
 import com.app.pdi.aplicacionmovilpdi.model.utils.Urls;
 
@@ -19,30 +19,30 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class getCampanasInteractorImpl implements CampanaContract.getCampanasInteractor {
+public class getTramitesInteractorImpl implements TramiteContract.getTramitesInteractor{
 
     Retrofit retrofit;
     ObtenerDatosService service;
 
 
     @Override
-    public void getCampanaArrayList(final OnFinishedListener onFinishedListener) {
+    public void getTramiteArrayList(final OnFinishedListener onFinishedListener) {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(1, TimeUnit.MINUTES)
                 .readTimeout(60,TimeUnit.SECONDS)
                 .writeTimeout(60,TimeUnit.SECONDS)
                 .build();
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://"+ Urls.direccionGenimotion+"/web/services/service-campana/")
+                .baseUrl("http://"+ Urls.direccionGenimotion+"/web/services/service-tramite/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         service = retrofit.create(ObtenerDatosService.class);
 
-        Call<List<Campana>> call = service.obtenerCampanas();
-        call.enqueue(new Callback<List<Campana>>() {
+        Call<List<Tramite>> call = service.obtenerTramites();
+        call.enqueue(new Callback<List<Tramite>>() {
             @Override
-            public void onResponse(Call<List<Campana>> call, Response<List<Campana>> response) {
+            public void onResponse(Call<List<Tramite>> call, Response<List<Tramite>> response) {
                 if (response.isSuccessful()) {
                     onFinishedListener.onFinished(response.body());
                 }else{
@@ -52,9 +52,10 @@ public class getCampanasInteractorImpl implements CampanaContract.getCampanasInt
             }
 
             @Override
-            public void onFailure(Call<List<Campana>> call, Throwable t) {
-                  onFinishedListener.onFailure(t);
+            public void onFailure(Call<List<Tramite>> call, Throwable t) {
+                onFinishedListener.onFailure(t);
             }
         });
     }
 }
+
