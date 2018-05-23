@@ -16,7 +16,9 @@
         android:layout_marginStart="38dp"
         android:background="#fff"
         android:onClick="ListarCampanas"
-        android:text="Campañas" />
+        android:text="Campañas"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="38dp" />
 
     <ImageButton
         android:id="@+id/img_btn_hablar"
@@ -50,7 +52,9 @@
         android:layout_marginEnd="38dp"
         android:background="#fff"
         android:onClick="ListarTramites"
-        android:text="Trámites" />
+        android:text="Trámites"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="38dp" />
 
 
 </RelativeLayout>
