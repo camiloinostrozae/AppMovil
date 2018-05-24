@@ -36,7 +36,7 @@ public class Login extends AppCompatActivity implements LoginView {
         actionBar.hide();
          //presenter implementado
         presenter = new LoginPresenterImpl(this);
-        isAvailable();
+        //isAvailable();
     }
 
     @Override

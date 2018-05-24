@@ -163,10 +163,10 @@
                 android:id="@+id/sexo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:popupBackground="#ffffff"
-                android:textColor="#fff"
-                tools:listitem="@android:layout/simple_list_item_1"
-                android:background="#ffffff"/>
+                android:background="#000033"
+                android:popupBackground="#000033"
+                android:textColor="@android:color/white"
+                tools:listitem="@android:layout/simple_list_item_1" />
 
             <TextView
                 android:id="@+id/label_region"

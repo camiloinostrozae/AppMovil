@@ -1,5 +1,6 @@
 package com.app.pdi.aplicacionmovilpdi.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
@@ -9,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
+import com.app.pdi.aplicacionmovilpdi.view.ListarCampanasActivity;
 
 
 import java.util.Locale;
@@ -20,10 +22,13 @@ public class ContenidoCampanaSeleccionada extends AppCompatActivity  implements
         TextToSpeech.OnInitListener{
 
          TextToSpeech tts;
+         TextToSpeech textoSpeech;
          TextView etx;
          ImageButton botonDetener;
-         public static int MILISEGUNDOS_ESPERA = 5000;
-    private ActionBar actionBar;
+         String titulo;
+         String contenido;
+         public static int MILISEGUNDOS_ESPERA = 15000;
+        private ActionBar actionBar;
 
         @Override
         protected void onCreate (Bundle savedInstanceState){
@@ -37,6 +42,14 @@ public class ContenidoCampanaSeleccionada extends AppCompatActivity  implements
         tts = new TextToSpeech(this, this);
         etx = findViewById(R.id.contenido_campana_seleccionada);
         botonDetener = findViewById(R.id.btnStop);
+            textoSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+                @Override
+                public void onInit(int status) {
+                    if (status != TextToSpeech.ERROR) {
+                        textoSpeech.setLanguage(Locale.getDefault());
+                    }
+                }
+            });
             botonDetener.setOnClickListener(new View.OnClickListener() {
 
                     @Override
@@ -44,15 +57,31 @@ public class ContenidoCampanaSeleccionada extends AppCompatActivity  implements
                         if (tts != null) {
                             tts.stop();
                             tts.shutdown();
+                            textoSpeech.speak("Relato Detenido",TextToSpeech.QUEUE_FLUSH,null);
                         }
-                    botonDetener.setEnabled(false);
+                    //botonDetener.setEnabled(false);
                     }
+
+            });
+            botonDetener.setOnLongClickListener(new View.OnLongClickListener() {
+
+                @Override
+                public boolean onLongClick (View view){
+                    onBackPressed();
+                    textoSpeech.speak(" Volviendo Atrás, lista de campañas",TextToSpeech.QUEUE_FLUSH,null);
+                    return false;
+                }
 
             });
 
         getIntentFromRecycler();
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();  // Invoca al método
     }
 
 
@@ -64,7 +93,7 @@ public class ContenidoCampanaSeleccionada extends AppCompatActivity  implements
             if(result==TextToSpeech.LANG_NOT_SUPPORTED || result==TextToSpeech.LANG_MISSING_DATA){
                 Log.e("TTS","Este lenguaje no es soportado");
             }else{
-                speakOut2();
+                speakOut2(titulo);
                 esperar(MILISEGUNDOS_ESPERA);
             }
         }else{
@@ -80,8 +109,9 @@ public class ContenidoCampanaSeleccionada extends AppCompatActivity  implements
         tts.speak(text,TextToSpeech.QUEUE_FLUSH,null);
     }
 
-    private void speakOut2() {
-        String text = "Información de la campaña, para detener el relato presione la pantalla";
+    private void speakOut2(String titulo) {
+        String text = "Para detener el relato presione una vez la pantalla, " +
+                "para volver a la lista de campañas mantenga presionada la pantalla. Contenido de la Campaña: "+titulo;
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 
@@ -97,8 +127,8 @@ public class ContenidoCampanaSeleccionada extends AppCompatActivity  implements
     private void getIntentFromRecycler(){
         //Obtengo los Intent que vienen de CampanaAdaptaer, especificamente, los que vienen de  itemView.setOnClickListener
         if(getIntent().hasExtra("contenido_campana") && getIntent().hasExtra("titulo_campana")){
-            String contenido = getIntent().getStringExtra("contenido_campana");
-            String titulo = getIntent().getStringExtra("titulo_campana");
+            contenido = getIntent().getStringExtra("contenido_campana");
+            titulo = getIntent().getStringExtra("titulo_campana");
             setTitulo(titulo);
             setContenido(contenido);
         }

@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -40,12 +41,43 @@ public class ListarCampanasActivity extends AppCompatActivity implements Campana
     private ActionBar actionBar;
 
     private TextToSpeech tts;
+    private TextToSpeech textoSpeech;
+    private Button volver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_campanas);
         tts = new TextToSpeech(this, this);
+        volver = findViewById(R.id.volver);
+
+        textoSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR) {
+                    textoSpeech.setLanguage(Locale.getDefault());
+                }
+            }
+        });
+        volver.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick (View view){
+                    textoSpeech.speak("Botón Volver Atrás",TextToSpeech.QUEUE_FLUSH,null);
+            }
+
+        });
+        volver.setOnLongClickListener(new View.OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick (View view){
+                onBackPressed();
+                textoSpeech.speak(" Volviendo Atrás, pantalla principal",TextToSpeech.QUEUE_FLUSH,null);
+                return false;
+            }
+
+        });
+
         inicializarRecyclerView();
         initProgressBar();
         presenter = new getCampanasPresenterImpl(this, new getCampanasInteractorImpl());
@@ -53,8 +85,11 @@ public class ListarCampanasActivity extends AppCompatActivity implements Campana
         //Para ocultar el menú de la barra
         actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
+    }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();  // Invoca al método
     }
 
 
@@ -149,8 +184,8 @@ public class ListarCampanasActivity extends AppCompatActivity implements Campana
 
     private void speakOut(){
 
-        String texto = "Lista de campañas disponibles, si desea saber el título y el tipo de la campaña " +
-                "presione una vez sobre el elemento. si desea saber su contenido mantenga presionado el elemento";
+        String texto = "A continuación se dan a conocer la lista de campañas disponibles, si desea saber la información del botón " +
+                "presione una vez el botón, si desea saber su contenido mantenga presionado ese botón";
          tts.speak(texto,TextToSpeech.QUEUE_FLUSH,null);
 
     }

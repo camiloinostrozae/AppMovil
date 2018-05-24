@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="24dp"
                 android:padding="8dp"
-                android:visibility="invisible" />
+                 />
 
             <me.biubiubiu.justifytext.library.JustifyTextView
                 android:id="@+id/contenido_campana_seleccionada"
@@ -32,7 +32,9 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:text=""
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:layout_marginTop="90dp"
+                />
             <ImageButton
                 android:id="@+id/btnStop"
                 android:layout_width="match_parent"
