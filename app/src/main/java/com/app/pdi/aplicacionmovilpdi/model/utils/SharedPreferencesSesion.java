@@ -46,7 +46,6 @@ public class SharedPreferencesSesion {
             editor.putString(PREFERENCES_USER_RUT,sesion.getRut());
             editor.putString(PREFERENCES_USER_CONTRASENA,sesion.getContrasena());
             editor.apply();
-
             userLoggedIn = true;
         }
     }

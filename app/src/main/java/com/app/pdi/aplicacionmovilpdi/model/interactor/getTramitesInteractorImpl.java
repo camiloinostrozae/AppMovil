@@ -6,6 +6,7 @@ import android.util.Log;
 import com.app.pdi.aplicacionmovilpdi.model.Object.Tramite;
 import com.app.pdi.aplicacionmovilpdi.model.interactor.interfaces.TramiteContract;
 import com.app.pdi.aplicacionmovilpdi.model.service.ObtenerDatosService;
+import com.app.pdi.aplicacionmovilpdi.model.utils.Urls;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class getTramitesInteractorImpl implements TramiteContract.getTramitesInt
                 .writeTimeout(60,TimeUnit.SECONDS)
                 .build();
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.33/proyectotitulo/web/services/service-tramite/")
+                .baseUrl("http://"+ Urls.direccionGenimotion+"/web/services/service-tramite/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

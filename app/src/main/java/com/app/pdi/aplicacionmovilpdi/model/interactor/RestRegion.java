@@ -1,6 +1,7 @@
 package com.app.pdi.aplicacionmovilpdi.model.interactor;
 
 import com.app.pdi.aplicacionmovilpdi.model.service.ObtenerDatosService;
+import com.app.pdi.aplicacionmovilpdi.model.utils.Urls;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,7 +22,7 @@ public final class RestRegion {
                     .writeTimeout(60,TimeUnit.SECONDS)
                     .build();
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.1.33/proyectotitulo/web/services/service-region/")
+                    .baseUrl("http://"+ Urls.direccionGenimotion+"/web/services/service-region/")
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

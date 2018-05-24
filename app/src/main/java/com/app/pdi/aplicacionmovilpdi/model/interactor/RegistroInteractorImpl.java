@@ -7,6 +7,7 @@ import com.app.pdi.aplicacionmovilpdi.model.Object.ResponseRegistro;
 import com.app.pdi.aplicacionmovilpdi.model.interactor.interfaces.RegistroInteractor;
 import com.app.pdi.aplicacionmovilpdi.model.service.InicioService;
 import com.app.pdi.aplicacionmovilpdi.model.service.PersonaService;
+import com.app.pdi.aplicacionmovilpdi.model.utils.Urls;
 import com.app.pdi.aplicacionmovilpdi.presenter.interfaces.RegistroPresenter;
 
 import java.util.concurrent.TimeUnit;
@@ -31,7 +32,7 @@ public class RegistroInteractorImpl implements RegistroInteractor {
                 .writeTimeout(60,TimeUnit.SECONDS)
                 .build();
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.33/proyectotitulo/web/service/")
+                .baseUrl("http://"+ Urls.direccionGenimotion+"/web/service/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

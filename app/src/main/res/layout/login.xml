@@ -21,9 +21,8 @@
         android:drawableLeft="@drawable/ic_person_black_24dp"
         android:drawablePadding="8dp"
         android:ems="10"
-        android:hint="Ingrese su Rut"
+        android:hint="Ingrese su R.U.T"
         android:inputType="text"
-        android:padding="10dp"
         android:textColor="#fff"
         android:textColorHint="#fff" />
 
@@ -38,7 +37,7 @@
         android:drawableLeft="@drawable/ic_lock_black_24dp"
         android:drawablePadding="8dp"
         android:ems="10"
-        android:hint=" Ingrese su contraseña"
+        android:hint="Ingrese su contraseña"
         android:inputType="textPassword"
         android:textColor="#fff"
         android:textColorHint="#fff"

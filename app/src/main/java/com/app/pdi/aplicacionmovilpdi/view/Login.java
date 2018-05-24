@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import com.app.pdi.aplicacionmovilpdi.R;
 import com.app.pdi.aplicacionmovilpdi.model.utils.NetworkState;
+import com.app.pdi.aplicacionmovilpdi.model.utils.SharedPreferencesSesion;
 import com.app.pdi.aplicacionmovilpdi.presenter.interfaces.LoginPresenter;
 import com.app.pdi.aplicacionmovilpdi.view.interfaces.LoginView;
 import com.app.pdi.aplicacionmovilpdi.presenter.LoginPresenterImpl;
@@ -23,12 +25,22 @@ public class Login extends AppCompatActivity implements LoginView {
     ActionBar actionBar;
     //Para mandar llamar al LoginPresenter , la interface
     private LoginPresenter presenter;
+    //variable del tipo SharedPreferencesSesion que servirá mantener la sesión activa
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*Comprobamos si el usuario ya se encuentra logueado en la app
+        * si es verdadero, lo mandamos directamente a la actividad principal
+        * sino es así, el login se carga normalmente.*/
+        if(SharedPreferencesSesion.get(this).isLogged()){
+          Intent intent = new Intent(this, PrincipalActivity.class);
+          startActivity(intent);
+          /*finish es para que una vez en PrincipalActivity, no pueda volver al login si
+            es que llegua a presionar el boton  de volver atrás*/
+          finish();
+        }
         setContentView(R.layout.login);
-
         rut=(EditText)findViewById(R.id.lrut);
         password=(EditText)findViewById(R.id.password);
         progressBar=(ProgressBar)findViewById(R.id.progressBar);
@@ -115,8 +127,10 @@ public class Login extends AppCompatActivity implements LoginView {
     }
 
     public  void isAvailable(){
-        if(NetworkState.getInstance().estadoConexion(this)){
+        if(!NetworkState.getInstance().estadoConexion(this)){
             Toast.makeText(Login.this,"SIN CONEXIÓN",Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(Login.this,"Si tenemos conexión",Toast.LENGTH_SHORT).show();
         }
     }
 
