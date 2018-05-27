@@ -33,7 +33,7 @@ public class getTramitesInteractorImpl implements TramiteContract.getTramitesInt
                 .writeTimeout(60,TimeUnit.SECONDS)
                 .build();
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://"+ Urls.direccionGenimotion+"/web/services/service-tramite/")
+                .baseUrl("http://"+ Urls.direccionJuan+"/web/services/service-tramite/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

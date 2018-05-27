@@ -50,15 +50,17 @@ public class LoginPresenterImpl implements LoginPresenter, OnLoginFinishListener
                         public void onResponse(Call<InicioSesion> call, Response<InicioSesion> response) {
                             if (response.isSuccessful()) {
                                 InicioSesion inicio = response.body();
-                                if (inicio.isEstado()) {
+                                if (!inicio.isEstado()) {
+                                    if (inicio.getCodigo() == 1) {
+                                        view.setRutError();
+                                        view.showProgress(false);
+                                    } else if (inicio.getCodigo() == 401) {
+                                        view.setPassNoExist();
+                                        view.showProgress(false);
+                                    }
+                                } else {
                                     SharedPreferencesSesion.get(view.getContext()).guardarPersona(response.body());
                                     view.loginSuccess();
-                                    view.showProgress(false);
-                                } else if (inicio.getCodigo() == 1) {
-                                    view.setRutError();
-                                    view.showProgress(false);
-                                } else if (inicio.getCodigo() == 401) {
-                                    view.setPassNoExist();
                                     view.showProgress(false);
                                 }
 
