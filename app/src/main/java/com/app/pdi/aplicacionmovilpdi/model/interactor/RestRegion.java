@@ -22,7 +22,11 @@ public final class RestRegion {
                     .writeTimeout(60,TimeUnit.SECONDS)
                     .build();
             retrofit = new Retrofit.Builder()
+<<<<<<< HEAD
                     .baseUrl("http://192.168.1.33/proyectotitulo/web/services/service-region/")
+=======
+                    .baseUrl("http://"+ Urls.direccionJuan+"/web/services/service-region/")
+>>>>>>> 65e790dba5704d53957a549f066e5fc44685d5bf
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

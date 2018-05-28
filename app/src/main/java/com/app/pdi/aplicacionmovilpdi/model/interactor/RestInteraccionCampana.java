@@ -9,30 +9,27 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RestComuna {
-
-    private static ObtenerDatosService servicio = null;
-
-    public static ObtenerDatosService getComuna(){
+public class RestInteraccionCampana {
+    
+    private static ObtenerDatosService service=null;
+    
+    public static ObtenerDatosService registrarInteraccionCampana(){
         final Retrofit retrofit;
-        if(servicio == null){
+        if(service==null) {
+
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
                     .connectTimeout(1, TimeUnit.MINUTES)
-                    .readTimeout(60,TimeUnit.SECONDS)
-                    .writeTimeout(60,TimeUnit.SECONDS)
+                    .readTimeout(60, TimeUnit.SECONDS)
+                    .writeTimeout(60, TimeUnit.SECONDS)
                     .build();
             retrofit = new Retrofit.Builder()
-<<<<<<< HEAD
-                    .baseUrl("http://192.168.1.33/proyectotitulo/web/services/service-comuna/")
-=======
-                    .baseUrl("http://"+ Urls.direccionJuan+"/web/services/service-comuna/")
->>>>>>> 65e790dba5704d53957a549f066e5fc44685d5bf
+                    .baseUrl("http://" + Urls.direccionJuan + "/web/services/service-interactuar-campana/")
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-            servicio =retrofit.create(ObtenerDatosService.class);
+            service = retrofit.create(ObtenerDatosService.class);
 
         }
-        return servicio;
+        return service;
     }
 }

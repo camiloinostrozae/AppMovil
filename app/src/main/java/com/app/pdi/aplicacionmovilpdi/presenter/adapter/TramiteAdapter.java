@@ -68,6 +68,7 @@ public class TramiteAdapter extends RecyclerView.Adapter<TramiteAdapter.TramiteV
                 //Se pasa a través de la activite el contenido y titulo del tramite que se verá solo en otra activity
                 intent.putExtra("titulo_tramite",lista.get(position).getTitulo());
                 intent.putExtra("contenido_tramite", lista.get(position).getContenido());
+                intent.putExtra("id_tramite",lista.get(position).getIdTramite());
                 context.startActivity(intent);
                 return false;
             }

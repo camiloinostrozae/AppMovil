@@ -71,6 +71,7 @@ public CampanaViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType){
                 //Se pasa a través de la activite el contenido y titulo de la campana que se verá solo en otra activity
                 intent.putExtra("titulo_campana",lista.get(position).getTitulo());
                 intent.putExtra("contenido_campana", lista.get(position).getContenido());
+                intent.putExtra("id_campana",lista.get(position).getIdCampana());
                 context.startActivity(intent);
                 return false;
             }

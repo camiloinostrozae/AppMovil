@@ -10,6 +10,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
+
+import com.app.pdi.aplicacionmovilpdi.model.Object.ResponseInteraccion;
+import com.app.pdi.aplicacionmovilpdi.model.interactor.RestInteraccionCampana;
+import com.app.pdi.aplicacionmovilpdi.model.utils.SharedPreferencesSesion;
 import com.app.pdi.aplicacionmovilpdi.view.ListarCampanasActivity;
 
 
@@ -17,9 +21,11 @@ import java.util.Locale;
 
 import com.app.pdi.aplicacionmovilpdi.R;
 
-public class ContenidoCampanaSeleccionada extends AppCompatActivity  implements
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-        TextToSpeech.OnInitListener{
+public class ContenidoCampanaSeleccionada extends AppCompatActivity  implements TextToSpeech.OnInitListener{
 
          TextToSpeech tts;
          TextToSpeech textoSpeech;
@@ -35,11 +41,13 @@ public class ContenidoCampanaSeleccionada extends AppCompatActivity  implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.campana_seleccionada);
 
+        //Registramos la interaccion con la campana
+         registrarInteraccion();
         //Para que la barra de herramientas no muestre el titulo de la app
             actionBar = getSupportActionBar();
             actionBar.setDisplayShowTitleEnabled(false);
 
-        tts = new TextToSpeech(this, this);
+       tts = new TextToSpeech(this, this);
         etx = findViewById(R.id.contenido_campana_seleccionada);
         botonDetener = findViewById(R.id.btnStop);
             textoSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
@@ -79,7 +87,7 @@ public class ContenidoCampanaSeleccionada extends AppCompatActivity  implements
 
     }
 
-    @Override
+   @Override
     public void onBackPressed() {
         super.onBackPressed();  // Invoca al método
     }
@@ -154,6 +162,34 @@ public class ContenidoCampanaSeleccionada extends AppCompatActivity  implements
             tts.shutdown();
         }
         super.onDestroy();
+    }
+
+
+    public void registrarInteraccion(){
+        String auth_key;
+        int campana_id_campana=0;
+        //Obtengo la auth_key del usuario guardada en las preferencias compartidas
+        auth_key = SharedPreferencesSesion.get(this).getPreferencesUserAuthkey();
+        if(getIntent().hasExtra("id_campana")){
+            campana_id_campana = getIntent().getIntExtra("id_campana",0);
+        }
+        //Mando a llamar el cliente REST
+        RestInteraccionCampana.registrarInteraccionCampana().registrarInteraccionCampana(auth_key,campana_id_campana)
+                .enqueue(new Callback<ResponseInteraccion>() {
+            @Override
+            public void onResponse(Call<ResponseInteraccion> call, Response<ResponseInteraccion> response) {
+                if(response.isSuccessful()){
+                    Log.e("dato","SI LOS REGISTRE el acceso a LA CAMPANA!!!!");
+                }else{
+                    Log.e("dato","No lo pude nah registrar");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseInteraccion> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
 

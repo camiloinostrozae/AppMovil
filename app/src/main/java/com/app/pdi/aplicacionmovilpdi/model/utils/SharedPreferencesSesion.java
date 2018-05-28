@@ -64,4 +64,8 @@ public class SharedPreferencesSesion {
     public String getPreferencesUserApellido(){
         return preferences.getString(PREFERENCES_USER_APELLIDO,null);
     }
+
+    public String getPreferencesUserAuthkey(){
+        return preferences.getString(PREFERENCES_USER_AUTHKEY,null);
+    }
 }

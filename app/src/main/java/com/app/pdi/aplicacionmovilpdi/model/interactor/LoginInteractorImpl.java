@@ -30,7 +30,11 @@ public class LoginInteractorImpl implements LoginInteractor {
                 .writeTimeout(30,TimeUnit.SECONDS)
                 .build();
         retrofit = new Retrofit.Builder()
+<<<<<<< HEAD
                 .baseUrl("http://192.168.1.33/proyectotitulo/web/service/")
+=======
+                .baseUrl("http://"+Urls.direccionJuan+"/web/service/")
+>>>>>>> 65e790dba5704d53957a549f066e5fc44685d5bf
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

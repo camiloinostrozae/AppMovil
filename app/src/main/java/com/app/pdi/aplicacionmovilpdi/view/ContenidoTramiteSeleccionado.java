@@ -14,10 +14,16 @@ import android.util.Log;
 import java.util.Locale;
 
 import com.app.pdi.aplicacionmovilpdi.R;
+import com.app.pdi.aplicacionmovilpdi.model.Object.ResponseInteraccion;
+import com.app.pdi.aplicacionmovilpdi.model.interactor.RestInteraccionCampana;
+import com.app.pdi.aplicacionmovilpdi.model.interactor.RestInteraccionTramite;
+import com.app.pdi.aplicacionmovilpdi.model.utils.SharedPreferencesSesion;
 
-public class ContenidoTramiteSeleccionado extends AppCompatActivity  implements
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-        TextToSpeech.OnInitListener{
+public class ContenidoTramiteSeleccionado extends AppCompatActivity  implements TextToSpeech.OnInitListener{
 
     TextToSpeech tts;
     TextToSpeech textoSpeech;
@@ -36,7 +42,7 @@ public class ContenidoTramiteSeleccionado extends AppCompatActivity  implements
         //Para que la barra de herramientas no muestre el titulo de la app
         actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
-
+        registrarInteraccion();
         tts = new TextToSpeech(this, this);
         etx = findViewById(R.id.contenido_tramite_seleccionado);
         botonDetener = findViewById(R.id.btnStop);
@@ -150,6 +156,34 @@ public class ContenidoTramiteSeleccionado extends AppCompatActivity  implements
             tts.shutdown();
         }
         super.onDestroy();
+    }
+
+
+    public void registrarInteraccion(){
+        String auth_key;
+        int tramite_id_tramite=0;
+        //Obtengo la auth_key del usuario guardada en las preferencias compartidas
+        auth_key = SharedPreferencesSesion.get(this).getPreferencesUserAuthkey();
+        if(getIntent().hasExtra("id_tramite")){
+            tramite_id_tramite = getIntent().getIntExtra("id_tramite",0);
+        }
+        //Mando a llamar el cliente REST
+        RestInteraccionTramite.registrarInteraccionTramite().registrarInteraccionTramite(auth_key,tramite_id_tramite)
+                .enqueue(new Callback<ResponseInteraccion>() {
+                    @Override
+                    public void onResponse(Call<ResponseInteraccion> call, Response<ResponseInteraccion> response) {
+                        if(response.isSuccessful()){
+                            Log.e("dato","SI LOS REGISTRE el acceso al tramite!!!!");
+                        }else{
+                            Log.e("dato","No lo pude nah registrar al tramite");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseInteraccion> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
     }
 
 
