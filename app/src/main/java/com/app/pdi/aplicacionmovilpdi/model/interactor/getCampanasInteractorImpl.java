@@ -33,11 +33,7 @@ public class getCampanasInteractorImpl implements CampanaContract.getCampanasInt
                 .writeTimeout(60,TimeUnit.SECONDS)
                 .build();
         retrofit = new Retrofit.Builder()
-<<<<<<< HEAD
-                .baseUrl("http://192.168.1.33/proyectotitulo/web/services/service-campana/")
-=======
-                .baseUrl("http://"+ Urls.direccionJuan+"/web/services/service-campana/")
->>>>>>> 65e790dba5704d53957a549f066e5fc44685d5bf
+                .baseUrl("http://arrau.chillan.ubiobio.cl:8075/jdoming/ProyectoTitulo/web/services/service-campana/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

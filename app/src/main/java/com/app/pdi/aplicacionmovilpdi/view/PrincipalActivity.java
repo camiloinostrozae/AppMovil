@@ -1,6 +1,7 @@
 package com.app.pdi.aplicacionmovilpdi.view;
 
 import android.content.Intent;
+import android.location.LocationManager;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -46,6 +47,7 @@ public class PrincipalActivity extends AppCompatActivity implements
     InicioSesion sesion;
     private Button boton;
     public static int MILISEGUNDOS_ESPERA = 5000;
+    //LocationManager locationManager;
 
 
     @Override
@@ -58,6 +60,8 @@ public class PrincipalActivity extends AppCompatActivity implements
         actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         sesion = new InicioSesion();
+
+        //locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
     }
 
@@ -84,7 +88,16 @@ public class PrincipalActivity extends AppCompatActivity implements
                             Intent intent = new Intent(this,ListarTramitesActivity.class);
                             startActivity(intent);
                         }else {
-                            speakOutReintento();
+                            if(grabar.getText().equals("llamada")){
+                                Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("tel:993912173"));
+                                if(ActivityCompat.checkSelfPermission(PrincipalActivity.this, Manifest.permission.CALL_PHONE) !=
+                                        PackageManager.PERMISSION_GRANTED)
+                                    return;
+                                startActivity(i);
+
+                            }else {
+                                speakOutReintento();
+                            }
                         }
                     }
 
