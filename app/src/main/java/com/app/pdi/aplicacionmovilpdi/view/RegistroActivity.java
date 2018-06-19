@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -76,13 +78,14 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
         region_id = new ArrayList<>();
         comuna_nombre = new ArrayList<>();
         comuna_id = new ArrayList<>();
-         nombre = (EditText)findViewById(R.id.nombre);
-         apellido = (EditText)findViewById(R.id.apellido);
-         telefono = (EditText)findViewById(R.id.telefono);
-         email =  (EditText)findViewById(R.id.remail);
-         password = (EditText)findViewById(R.id.rcontrasena);
-         rut = (EditText)findViewById(R.id.rut);
-         fechaNacimiento = (EditText)findViewById(R.id.rfechanacimiento);
+        nombre = (EditText)findViewById(R.id.nombre);
+        apellido = (EditText)findViewById(R.id.apellido);
+        telefono = (EditText)findViewById(R.id.telefono);
+        email =  (EditText)findViewById(R.id.remail);
+        password = (EditText)findViewById(R.id.rcontrasena);
+        rut = (EditText)findViewById(R.id.rut);
+        rut.addTextChangedListener(cambiarFormatoRut());
+        fechaNacimiento = (EditText)findViewById(R.id.rfechanacimiento);
         //Spinner para el sexo
         sexo = (Spinner) findViewById(R.id.sexo);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.opciones, android.R.layout.simple_spinner_dropdown_item);
@@ -373,10 +376,65 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
 
     }
 
-    //Método que habilita la seleccion para las ocmunas dentro de spinner.
+    //Método que habilita la seleccion para las comunas dentro de spinner.
     public void comunaLoad(boolean estado) {
         region_spinner.setEnabled(!estado);
         comuna_spinner.setEnabled(!estado);
+    }
+
+
+    public String formatearRut(String rut){
+        int cont = 0;
+        String formato;
+        //Si se ingresa un punto se cambia por una cadena vacía
+        rut = rut.replace(".","");
+        //Si ingresa el guión se cambia por una cadena vacía
+        rut = rut.replace("-","");
+        //Se agrega el "-" al String formato
+        formato = "-" + rut.substring(rut.length()-1);
+        for(int i = rut.length()-2; i>=0;i--){
+            formato = rut.substring(i, i + 1) + formato;
+            cont++;
+            if (cont == 3 && i != 0) {
+                formato = "." + formato;
+                cont = 0;
+            }
+        }
+        return formato;
+    }
+
+    //Método utilizado para ir cambiando en tiempo real el formato el rut
+    private TextWatcher cambiarFormatoRut(){
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                rut.removeTextChangedListener(this);
+                try{
+                    if(rut.getText().length()>1){
+                        String rutFormateado = formatearRut(rut.getText().toString());
+                        rut.getText().replace(0,rut.getText().length(),rutFormateado,0,rutFormateado.length());
+
+                    }
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                rut.addTextChangedListener(this);
+
+            }
+
+        };
+
     }
 
 }

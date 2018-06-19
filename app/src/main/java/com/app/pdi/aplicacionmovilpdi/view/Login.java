@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -42,6 +44,7 @@ public class Login extends AppCompatActivity implements LoginView {
         }
         setContentView(R.layout.login);
         rut=(EditText)findViewById(R.id.lrut);
+        rut.addTextChangedListener(cambiarFormatoRut());
         password=(EditText)findViewById(R.id.password);
         progressBar=(ProgressBar)findViewById(R.id.progressBar);
         actionBar = getSupportActionBar();
@@ -115,9 +118,8 @@ public class Login extends AppCompatActivity implements LoginView {
         return this;
     }
 
-    //botón "iniciar sesion del el login"
+    //botón "iniciar sesion del login"
     public void validacion(View view){
-
      presenter.validarUsuario(rut.getText().toString(),password.getText().toString());
     }
 
@@ -135,6 +137,58 @@ public class Login extends AppCompatActivity implements LoginView {
     }
 
 
+    public String formatearRut(String rut){
+        int cont = 0;
+        String formato;
+        //Si se ingresa un punto se cambia por una cadena vacía
+        rut = rut.replace(".","");
+        //Si ingresa el guión se cambia por una cadena vacía
+        rut = rut.replace("-","");
+        //Se agrega el "-" al String formato
+        formato = "-" + rut.substring(rut.length()-1);
+        for(int i = rut.length()-2; i>=0;i--){
+            formato = rut.substring(i, i + 1) + formato;
+            cont++;
+            if (cont == 3 && i != 0) {
+                formato = "." + formato;
+                cont = 0;
+            }
+        }
+        return formato;
+    }
 
+    //Método utilizado para ir cambiando en tiempo real el formato el rut
+    private TextWatcher cambiarFormatoRut(){
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                rut.removeTextChangedListener(this);
+                try{
+                    if(rut.getText().length()>1){
+                        String rutFormateado = formatearRut(rut.getText().toString());
+                        rut.getText().replace(0,rut.getText().length(),rutFormateado,0,rutFormateado.length());
+
+                    }
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                rut.addTextChangedListener(this);
+
+            }
+
+        };
+
+    }
 
 }
