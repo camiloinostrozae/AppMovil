@@ -9,12 +9,12 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RestComuna {
+public class RestLlamada {
 
     private static ObtenerDatosService servicio = null;
 
-    public static ObtenerDatosService getComuna(){
-        final Retrofit retrofit;
+    public static  ObtenerDatosService guardarUbicacion(){
+        Retrofit retrofit;
         if(servicio == null){
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
                     .connectTimeout(1, TimeUnit.MINUTES)
@@ -22,14 +22,11 @@ public class RestComuna {
                     .writeTimeout(60,TimeUnit.SECONDS)
                     .build();
             retrofit = new Retrofit.Builder()
-
-                    .baseUrl("http://"+Urls.direccionJuan+"/web/services/service-comuna/")
-
+                    .baseUrl("http://" + Urls.direccionJuan + "/web/services/service-llamada/")
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-            servicio =retrofit.create(ObtenerDatosService.class);
-
+            servicio = retrofit.create(ObtenerDatosService.class);
         }
         return servicio;
     }

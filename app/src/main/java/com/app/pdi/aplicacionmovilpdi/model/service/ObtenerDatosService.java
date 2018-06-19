@@ -46,4 +46,12 @@ public interface ObtenerDatosService {
     @POST("registrar-interaccion-tramite")
     Call<ResponseInteraccion>registrarInteraccionTramite(@Field("auth_key") String auth_key,
                                                   @Field("tramite_id_tramite") int tramite_id_tramite);
+
+
+    //llamada para registrar una llamada
+    @FormUrlEncoded
+    @POST("guardar-llamada")
+    Call<ResponseInteraccion>guardarLlamada(@Field("auth_key") String auth_key,
+                                        @Field("latitud") double latitud,
+                                        @Field("longitud") double longitud);
 }

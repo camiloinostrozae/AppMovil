@@ -39,7 +39,7 @@ public class ContenidoTramiteSeleccionado extends AppCompatActivity  implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tramite_seleccionado);
 
-        //Para que la barra de herramientas no muestre el titulo de la app
+        //Para que l a barra de herramientas no muestre el titulo de la app
         actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         registrarInteraccion();

@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Url;
 
 public final class RestRegion {
 
@@ -22,7 +23,7 @@ public final class RestRegion {
                     .writeTimeout(60,TimeUnit.SECONDS)
                     .build();
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://arrau.chillan.ubiobio.cl:8075/jdoming/ProyectoTitulo/web/services/service-region/")
+                    .baseUrl("http://"+ Urls.direccionJuan+"/web/services/service-region/")
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
