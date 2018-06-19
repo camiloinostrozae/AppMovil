@@ -99,7 +99,7 @@ public class PrincipalActivity extends AppCompatActivity implements
                             startActivity(intent);
                         }else {
                             if(grabar.getText().equals("llamada")){
-                                Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("tel:966702622"));
+                                Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("tel:973773910"));
                                 if(ActivityCompat.checkSelfPermission(PrincipalActivity.this, Manifest.permission.CALL_PHONE) !=
                                         PackageManager.PERMISSION_GRANTED)
                                     return;
