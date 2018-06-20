@@ -57,7 +57,7 @@ public class TramiteAdapter extends RecyclerView.Adapter<TramiteAdapter.TramiteV
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String texto = "Título del Trámite, " + lista.get(position).getTitulo()+" Tipo del Trámite, " + lista.get(position).getTipo();
+                String texto = "Título, " + lista.get(position).getTitulo()+" Tipo, " + lista.get(position).getTipo();
                 textoSpeech.speak(texto, TextToSpeech.QUEUE_FLUSH,null);
             }
         });

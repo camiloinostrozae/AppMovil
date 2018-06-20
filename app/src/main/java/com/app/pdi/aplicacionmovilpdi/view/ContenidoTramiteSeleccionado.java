@@ -31,7 +31,7 @@ public class ContenidoTramiteSeleccionado extends AppCompatActivity  implements 
     ImageButton botonDetener;
     String titulo;
     String contenido;
-    public static int MILISEGUNDOS_ESPERA = 15000;
+    public static int MILISEGUNDOS_ESPERA = 10000;
     private ActionBar actionBar;
 
     @Override
@@ -72,7 +72,7 @@ public class ContenidoTramiteSeleccionado extends AppCompatActivity  implements 
             @Override
             public boolean onLongClick (View view){
                 onBackPressed();
-                textoSpeech.speak(" Volviendo Atrás, lista de trámites",TextToSpeech.QUEUE_FLUSH,null);
+                textoSpeech.speak(" Volviendo Atrás",TextToSpeech.QUEUE_FLUSH,null);
                 return false;
             }
 
@@ -95,7 +95,7 @@ public class ContenidoTramiteSeleccionado extends AppCompatActivity  implements 
             if(result==TextToSpeech.LANG_NOT_SUPPORTED || result==TextToSpeech.LANG_MISSING_DATA){
                 Log.e("TTS","Este lenguaje no es soportado");
             }else{
-                speakOut2(titulo);
+                speakOut2();
                 esperar(MILISEGUNDOS_ESPERA);
             }
         }else{
@@ -111,9 +111,9 @@ public class ContenidoTramiteSeleccionado extends AppCompatActivity  implements 
         tts.speak(text,TextToSpeech.QUEUE_FLUSH,null);
     }
 
-    private void speakOut2(String titulo) {
-        String text = "Para detener el relato presione una vez la pantalla, " +
-                "para volver a la lista de trámites mantenga presionada la pantalla. Contenido del Trámite: "+titulo;
+    private void speakOut2() {
+        String text = "A continuación se presenta el contenido de la campaña, para detener el relato presione " +
+                "una vez la pantalla y para volver atrás mantenga presionada la pantalla.";
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 

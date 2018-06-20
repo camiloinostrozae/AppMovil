@@ -54,7 +54,8 @@ public class PrincipalActivity extends AppCompatActivity implements
     private ActionBar actionBar;
     InicioSesion sesion;
     private Button boton;
-    public static int MILISEGUNDOS_ESPERA = 5000;
+    //public static int MILISEGUNDOS_ESPERA = 5000;
+    public static  int MILISEGUNDOS_LLAMADA = 2000;
     //LocationManager locationManager;
     Localizacion localizacion;
     Location location;
@@ -99,10 +100,6 @@ public class PrincipalActivity extends AppCompatActivity implements
                             startActivity(intent);
                         }else {
                             if(grabar.getText().equals("llamada")){
-                                Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("tel:973773910"));
-                                if(ActivityCompat.checkSelfPermission(PrincipalActivity.this, Manifest.permission.CALL_PHONE) !=
-                                        PackageManager.PERMISSION_GRANTED)
-                                    return;
                                 //Para la localizacion
                                 localizacion = new Localizacion(PrincipalActivity.this);
                                 if(localizacion.canGetLocation()){
@@ -111,10 +108,12 @@ public class PrincipalActivity extends AppCompatActivity implements
                                     Log.e("Dato","lat************ " + latitud);
                                     Log.e("Dato","lat************ " + longitud);
                                     generarUbicacion(latitud,longitud);
-                                    startActivity(i);
                                 }else{
                                     localizacion.showSettingsAlert();
                                 }
+
+                                speakOutLlamada();
+                                esperaLlamada(MILISEGUNDOS_LLAMADA);
 
 
                             }else {
@@ -151,9 +150,11 @@ public class PrincipalActivity extends AppCompatActivity implements
     public void onClickImgBtnHablar(View v) {
 
         speakOut2();
-        esperar(MILISEGUNDOS_ESPERA);
+        escuchar();
+        //esperar(MILISEGUNDOS_ESPERA);
     }
 
+    /**
     public void esperar(int milisegundos) {
 
         Handler handler = new Handler();
@@ -162,7 +163,26 @@ public class PrincipalActivity extends AppCompatActivity implements
                 escuchar();
             }
         }, milisegundos);
+    }*/
+
+    public void esperaLlamada(int milisegundos) {
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                realizarLlamada();
+            }
+        }, milisegundos);
     }
+
+    public void realizarLlamada(){
+        Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("tel:993912173"));
+        if(ActivityCompat.checkSelfPermission(PrincipalActivity.this, Manifest.permission.CALL_PHONE) !=
+                PackageManager.PERMISSION_GRANTED)
+            return;
+        startActivity(i);
+    }
+
 
     public void escuchar(){
         Intent intentActionRecognizeSpeech = new Intent(
@@ -182,6 +202,16 @@ public class PrincipalActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void onDestroy() {
+        // Don't forget to shutdown tts!
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
+        super.onDestroy();
+    }
+
+    @Override
     public void onInit(int status) {
 
         if(status==TextToSpeech.SUCCESS){
@@ -196,15 +226,18 @@ public class PrincipalActivity extends AppCompatActivity implements
         }
     }
 
+
     private void speakOut() {
 
-        String text = "Bienvenido, toque la pantalla para continuar";
-        tts.speak(text,TextToSpeech.QUEUE_FLUSH,null);
+        String text = "Bienvenido, Para conocer las campañas toque la pantalla y diga, campañas, para conocer los trámites " +
+                "toque la pantalla y diga, trámites, para realizar una " +
+                "llamada toque la pantalla y diga, llamada";
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 
     private void speakOut2() {
 
-        String text = "Si quiere conocer las campañas diga, campañas, si quiere conocer los trámites diga, trámites";
+        String text = "Hable Ahora";
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 
@@ -217,6 +250,12 @@ public class PrincipalActivity extends AppCompatActivity implements
     private void speakOutReintento() {
 
         String text = "Intente nuevamente";
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+    }
+
+    private void speakOutLlamada() {
+
+        String text = "Realizando llamada a la PDI";
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 

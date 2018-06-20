@@ -64,7 +64,11 @@ public class ListarTramitesActivity extends AppCompatActivity implements Tramite
 
             @Override
             public void onClick (View view){
-                textoSpeech.speak("Botón Volver Atrás",TextToSpeech.QUEUE_FLUSH,null);
+                if (tts != null) {
+                    tts.stop();
+                    tts.shutdown();
+                }
+                textoSpeech.speak("Botón Volver",TextToSpeech.QUEUE_FLUSH,null);
             }
 
         });
@@ -72,8 +76,12 @@ public class ListarTramitesActivity extends AppCompatActivity implements Tramite
 
             @Override
             public boolean onLongClick (View view){
+                if (tts != null) {
+                    tts.stop();
+                    tts.shutdown();
+                }
                 onBackPressed();
-                textoSpeech.speak(" Volviendo Atrás, pantalla principal",TextToSpeech.QUEUE_FLUSH,null);
+                textoSpeech.speak(" Volviendo Atrás",TextToSpeech.QUEUE_FLUSH,null);
                 return false;
             }
 
@@ -143,8 +151,13 @@ public class ListarTramitesActivity extends AppCompatActivity implements Tramite
 
     }
 
+
     @Override
     protected void onDestroy(){
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
         super.onDestroy();
         presenter.onDestroy();
     }
@@ -166,6 +179,8 @@ public class ListarTramitesActivity extends AppCompatActivity implements Tramite
     }
 
 
+
+
     @Override
     public void onInit(int status) {
 
@@ -184,8 +199,9 @@ public class ListarTramitesActivity extends AppCompatActivity implements Tramite
 
     private void speakOut(){
 
-        String texto = "A continuación se dan a conocer la lista de trámites disponibles, si desea saber la información del botón " +
-                "presione una vez el botón, si desea saber su contenido mantenga presionado ese botón";
+        String texto = "A continuación se presentan una lista de botones, cada botón representa un tramite," +
+                "presione una vez el botón para saber su información, mantenga presionado el botón para" +
+                " saber su contenido";
         tts.speak(texto,TextToSpeech.QUEUE_FLUSH,null);
 
     }

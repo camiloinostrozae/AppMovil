@@ -60,7 +60,7 @@ public CampanaViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType){
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String texto = "Título de la Campaña, " + lista.get(position).getTitulo()+" Tipo de la Campaña, " + lista.get(position).getTipo();
+                String texto = "Título, " + lista.get(position).getTitulo()+" Tipo, " + lista.get(position).getTipo();
                 textoSpeech.speak(texto, TextToSpeech.QUEUE_FLUSH,null);
             }
         });
