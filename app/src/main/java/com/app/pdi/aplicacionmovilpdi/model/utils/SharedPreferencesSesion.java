@@ -14,6 +14,7 @@ public class SharedPreferencesSesion {
     public static final String PREFERENCES_USER_AUTHKEY = "PREFERENCES_USER_AUTHKEY";
     public static final String PREFERENCES_USER_RUT = "PREFERENCES_USER_RUT";
     public static final String PREFERENCES_USER_CONTRASENA = "PREFERENCES_USER_CONTRASENA";
+    public static final String PREFERENCES_USER_ROL = "PREFERENCES_USER_ROL";
 
     private final SharedPreferences preferences;
     private boolean userLoggedIn = false;
@@ -45,6 +46,7 @@ public class SharedPreferencesSesion {
             editor.putString(PREFERENCES_USER_AUTHKEY,sesion.getAuthKey());
             editor.putString(PREFERENCES_USER_RUT,sesion.getRut());
             editor.putString(PREFERENCES_USER_CONTRASENA,sesion.getContrasena());
+            editor.putInt(PREFERENCES_USER_ROL,sesion.getRol());
             editor.apply();
             userLoggedIn = true;
         }
@@ -58,6 +60,7 @@ public class SharedPreferencesSesion {
         editor.putString(PREFERENCES_USER_AUTHKEY,null);
         editor.putString(PREFERENCES_USER_RUT,null);
         editor.putString(PREFERENCES_USER_CONTRASENA,null);
+        editor.putInt(PREFERENCES_USER_ROL, 0);
         editor.apply();
     }
 
@@ -67,5 +70,9 @@ public class SharedPreferencesSesion {
 
     public String getPreferencesUserAuthkey(){
         return preferences.getString(PREFERENCES_USER_AUTHKEY,null);
+    }
+
+    public int getPreferencesUserRol(){
+        return preferences.getInt(PREFERENCES_USER_ROL,0);
     }
 }

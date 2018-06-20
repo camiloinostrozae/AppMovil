@@ -170,6 +170,7 @@ public class ContenidoCampanaSeleccionada extends AppCompatActivity  implements 
         int campana_id_campana=0;
         //Obtengo la auth_key del usuario guardada en las preferencias compartidas
         auth_key = SharedPreferencesSesion.get(this).getPreferencesUserAuthkey();
+        final int numero = SharedPreferencesSesion.get(this).getPreferencesUserRol();
         if(getIntent().hasExtra("id_campana")){
             campana_id_campana = getIntent().getIntExtra("id_campana",0);
         }
@@ -180,6 +181,7 @@ public class ContenidoCampanaSeleccionada extends AppCompatActivity  implements 
             public void onResponse(Call<ResponseInteraccion> call, Response<ResponseInteraccion> response) {
                 if(response.isSuccessful()){
                     Log.e("dato","SI LOS REGISTRE el acceso a LA CAMPANA!!!!");
+                    Log.e("Dato","rol: " + numero);
                 }else{
                     Log.e("dato","No lo pude nah registrar");
                 }

@@ -16,6 +16,9 @@ public class InicioSesion {
     @SerializedName("auth_key")
     @Expose
     private String authKey;
+    @SerializedName("rol")
+    @Expose
+    private int rol;
 
     /**
      * No args constructor for use in serialization
@@ -33,7 +36,7 @@ public class InicioSesion {
      * @param authKey
      * @param mensaje
      */
-    public InicioSesion(int codigo, boolean estado, String mensaje, String nombre, String apellido, String rut, String contrasena, String authKey) {
+    public InicioSesion(int codigo, boolean estado, String mensaje, String nombre, String apellido, String rut, String contrasena, String authKey, int rol) {
         super();
         this.codigo = codigo;
         this.estado = estado;
@@ -43,6 +46,7 @@ public class InicioSesion {
         this.rut = rut;
         this.contrasena = contrasena;
         this.authKey = authKey;
+        this.rol = rol;
     }
 
     public int getCodigo() {
@@ -115,6 +119,14 @@ public class InicioSesion {
 
     public void setRut(String rut) {
         this.rut = rut;
+    }
+
+    public int getRol() {
+        return rol;
+    }
+
+    public void setRol(int rol) {
+        this.rol = rol;
     }
 
 }
