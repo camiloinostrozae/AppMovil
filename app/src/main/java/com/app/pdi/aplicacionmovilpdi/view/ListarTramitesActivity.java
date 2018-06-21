@@ -199,9 +199,10 @@ public class ListarTramitesActivity extends AppCompatActivity implements Tramite
 
     private void speakOut(){
 
-        String texto = "A continuación se presentan una lista de botones, cada botón representa un tramite," +
-                "presione una vez el botón para saber su información, mantenga presionado el botón para" +
-                " saber su contenido";
+        String texto = "A continuación se presentan una lista de botones." +
+                "Cada botón representa un trámite." +
+                "Presione una vez el botón para saber su información." +
+                "Mantenga presionado el botón para saber su contenido";
         tts.speak(texto,TextToSpeech.QUEUE_FLUSH,null);
 
     }

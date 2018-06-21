@@ -196,9 +196,10 @@ public class ListarCampanasActivity extends AppCompatActivity implements Campana
 
     private void speakOut(){
 
-        String texto = "A continuación se presentan una lista de botones, cada botón representa una campaña," +
-                "presione una vez el botón para saber su información, mantenga presionado el botón para" +
-                " saber su contenido";
+        String texto = "A continuación se presentan una lista de botones." +
+                "Cada botón representa una campaña." +
+                "Presione una vez el botón para saber su información." +
+                "Mantenga presionado el botón para saber su contenido";
          tts.speak(texto,TextToSpeech.QUEUE_FLUSH,null);
 
     }

@@ -31,7 +31,7 @@ public class ContenidoTramiteSeleccionado extends AppCompatActivity  implements 
     ImageButton botonDetener;
     String titulo;
     String contenido;
-    public static int MILISEGUNDOS_ESPERA = 10000;
+    public static int MILISEGUNDOS_ESPERA = 11000;
     private ActionBar actionBar;
 
     @Override
@@ -106,14 +106,15 @@ public class ContenidoTramiteSeleccionado extends AppCompatActivity  implements 
     private void speakOut() {
 
         String text = etx.getText().toString();
-        tts.setSpeechRate((float) 0.9);//define la velocidad del relato x defecto 1.0
+        //tts.setSpeechRate((float) 0.9);//define la velocidad del relato x defecto 1.0
         //tts.setPitch((float) 1.1);//define el tono del relato x defecto 1.0
         tts.speak(text,TextToSpeech.QUEUE_FLUSH,null);
     }
 
     private void speakOut2() {
-        String text = "A continuación se presenta el contenido de la campaña, para detener el relato presione " +
-                "una vez la pantalla y para volver atrás mantenga presionada la pantalla.";
+        String text = "A continuación se presenta el contenido del trámite."+
+                "Para detener el relato presione una vez la pantalla." +
+                "Para volver atrás mantenga presionada la pantalla.";
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 

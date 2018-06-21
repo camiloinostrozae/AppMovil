@@ -60,6 +60,7 @@ public class PrincipalActivity extends AppCompatActivity implements
     Localizacion localizacion;
     Location location;
     double latitud, longitud;
+    int numero = SharedPreferencesSesion.get(this).getPreferencesUserRol();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +97,7 @@ public class PrincipalActivity extends AppCompatActivity implements
                         startActivity(intent);
                     }else{
                         if(grabar.getText().equals("trámites") || grabar.getText().equals("trámite")){
+                           // Log.e("qwerty","e " + SharedPreferencesSesion.get(this).getPreferencesUserRol());
                             Intent intent = new Intent(this,ListarTramitesActivity.class);
                             startActivity(intent);
                         }else {
@@ -219,7 +221,12 @@ public class PrincipalActivity extends AppCompatActivity implements
             if(result==TextToSpeech.LANG_NOT_SUPPORTED || result==TextToSpeech.LANG_MISSING_DATA){
                 Log.e("TTS","Este lenguaje no es soportado");
             }else{
-                speakOut();
+               // if(SharedPreferencesSesion.get(this).getPreferencesUserRol()==4){
+                 //   speakOutDiscapacitado();
+                //}else{
+                    speakOutDiscapacitado();
+                //}
+
             }
         }else{
             Log.e("TTS","Inicializacion del lenguaje es fallida");
@@ -227,11 +234,18 @@ public class PrincipalActivity extends AppCompatActivity implements
     }
 
 
-    private void speakOut() {
+    private void speakOutNoDiscapacitado() {
 
-        String text = "Bienvenido, Para conocer las campañas toque la pantalla y diga, campañas, para conocer los trámites " +
-                "toque la pantalla y diga, trámites, para realizar una " +
-                "llamada toque la pantalla y diga, llamada";
+        String text = "Bienvenido, Para conocer las campañas toque la pantalla y diga, campañas." +
+                "Para conocer los trámites toque la pantalla y diga, trámites.";
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+    }
+
+    private void speakOutDiscapacitado() {
+
+        String text = "Bienvenido, Para conocer las campañas toque la pantalla y diga, campañas." +
+                "Para conocer los trámites toque la pantalla y diga, trámites." +
+                "Para realizar una llamada toque la pantalla y diga, llamada.";
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 
