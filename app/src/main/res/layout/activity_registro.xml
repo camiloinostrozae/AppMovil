@@ -149,7 +149,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:background="#000033"
+
                 android:drawableLeft="@drawable/ic_person_black_24dp"
                 android:drawablePadding="8dp"
                 android:ems="10"
@@ -181,7 +181,7 @@
                 android:ems="10"
                 android:text="Región"
                 android:textColor="#fff"
-                android:background="#000033"
+
                 />
 
             <Spinner
