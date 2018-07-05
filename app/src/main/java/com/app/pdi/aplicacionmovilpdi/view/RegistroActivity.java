@@ -144,8 +144,9 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
     }
 
     @Override
-    public void registroSuccess() {
+    public void registroSuccess(String mensaje) {
         Intent intent = new Intent(this, Login.class);
+        intent.putExtra("REGISTRO_EXITOSO",mensaje);
         startActivity(intent);
     }
 
