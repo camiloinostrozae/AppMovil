@@ -189,7 +189,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
 
     @Override
     public void setErrorRutExiste() {
-        rut.setError("El R.U.N ingresado ya se encuentra registrado en la aplicación ");
+        rut.setError("El R.U.T ingresado ya se encuentra registrado en la aplicación ");
     }
 
     @Override

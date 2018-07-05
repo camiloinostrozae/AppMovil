@@ -20,7 +20,7 @@ public class RestInteraccionTramite {
                 .writeTimeout(60,TimeUnit.SECONDS)
                 .build();
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://"+Urls.direccionJuan+"/web/services/service-interactuar-tramite/")
+                .baseUrl("http://"+Urls.servidor+"/web/services/service-interactuar-tramite/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
