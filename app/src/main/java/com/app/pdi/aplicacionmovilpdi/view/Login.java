@@ -49,6 +49,11 @@ public class Login extends AppCompatActivity implements LoginView {
         progressBar=(ProgressBar)findViewById(R.id.progressBar);
         actionBar = getSupportActionBar();
         actionBar.hide();
+        Intent intent = getIntent();
+        String mensaje = intent.getStringExtra("REGISTRO_EXITOSO");
+        if(mensaje!=null){
+            registroSuccess(mensaje);
+        }
          //presenter implementado
         presenter = new LoginPresenterImpl(this);
         //isAvailable();
@@ -91,6 +96,11 @@ public class Login extends AppCompatActivity implements LoginView {
     public void loginFailed(String mensaje) {
         Toast.makeText(Login.this,mensaje,Toast.LENGTH_SHORT).show();
 
+    }
+
+    @Override
+    public void registroSuccess(String mensaje) {
+        Toast.makeText(Login.this, mensaje, Toast.LENGTH_SHORT).show();
     }
 
     @Override

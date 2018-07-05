@@ -9,6 +9,7 @@ public interface LoginView {
     void setErrorPassword();
     void loginSuccess();
     void loginFailed(String mensaje);
+    void registroSuccess(String mensaje);
     void setRutError();
     void setPassNoExist();
     void setErrorRutNoExiste();

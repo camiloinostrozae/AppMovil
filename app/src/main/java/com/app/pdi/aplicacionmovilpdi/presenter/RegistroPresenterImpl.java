@@ -48,7 +48,7 @@ public class RegistroPresenterImpl implements RegistroPresenter {
                             if(response.isSuccessful()){
                                 ResponseRegistro inicio = response.body();
                                 if(inicio.isEstado()){
-                                    view.registroSuccess();
+                                    view.registroSuccess("Registro completado exitosamente");
                                     view.showProgress(false);
                                 }else if(inicio.getCodigo()==1){
                                     view.setErrorRutExiste();

@@ -3,7 +3,7 @@ package com.app.pdi.aplicacionmovilpdi.view.interfaces;
 public interface RegistroView {
 
     void showProgress(boolean progress);
-    void registroSuccess();
+    void registroSuccess(String mensaje);
     void registroFailed(String mensaje);
     void setErrorNombre();
     void setNombreNoValido();
