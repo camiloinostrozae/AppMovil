@@ -88,8 +88,11 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
         fechaNacimiento = (EditText)findViewById(R.id.rfechanacimiento);
         //Spinner para el sexo
         sexo = (Spinner) findViewById(R.id.sexo);
+        String [] listaSexo = new String [] {"Seleccione una opción","Masculino","Femenino"};
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.opciones, android.R.layout.simple_spinner_dropdown_item);
-        sexo.setAdapter(adapter);
+        ArrayAdapter<String> adapterSexo = new ArrayAdapter<String>(this, R.layout.spinner_sexo_style,listaSexo);
+        adapterSexo.setDropDownViewResource(R.layout.spinner_sexo_style);
+        sexo.setAdapter(adapterSexo);
         label_sexo = findViewById(R.id.label_sexo);
         //Spinner para la region
         comuna_spinner = (Spinner) findViewById(R.id.comuna);

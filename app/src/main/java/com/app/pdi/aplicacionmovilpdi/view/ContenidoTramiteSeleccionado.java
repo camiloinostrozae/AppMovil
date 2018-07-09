@@ -38,7 +38,7 @@ public class ContenidoTramiteSeleccionado extends AppCompatActivity  implements 
     protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tramite_seleccionado);
-
+        Log.e("QWERTYUIOP","e " + SharedPreferencesSesion.get(this).getPreferencesUserRol());
         //Para que l a barra de herramientas no muestre el titulo de la app
         actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);

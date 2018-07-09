@@ -74,6 +74,7 @@ public class PrincipalActivity extends AppCompatActivity implements
         sesion = new InicioSesion();
 
         //locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        Log.e("QWERTYUIOP","e " + SharedPreferencesSesion.get(this).getPreferencesUserRol());
 
     }
 
@@ -97,7 +98,7 @@ public class PrincipalActivity extends AppCompatActivity implements
                         startActivity(intent);
                     }else{
                         if(grabar.getText().equals("trámites") || grabar.getText().equals("trámite")){
-                           //Log.e("qwerty","e " + SharedPreferencesSesion.get(this).getPreferencesUserRol());
+
                             Intent intent = new Intent(this,ListarTramitesActivity.class);
                             startActivity(intent);
                         }else {
