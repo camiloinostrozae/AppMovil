@@ -72,9 +72,9 @@ public class PrincipalActivity extends AppCompatActivity implements
         actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         sesion = new InicioSesion();
+        //Log.e("qwerty","el numero es:  " + SharedPreferencesSesion.get(this).getPreferencesUserRol());
 
         //locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        Log.e("QWERTYUIOP","e " + SharedPreferencesSesion.get(this).getPreferencesUserRol());
 
     }
 
@@ -98,7 +98,6 @@ public class PrincipalActivity extends AppCompatActivity implements
                         startActivity(intent);
                     }else{
                         if(grabar.getText().equals("trámites") || grabar.getText().equals("trámite")){
-
                             Intent intent = new Intent(this,ListarTramitesActivity.class);
                             startActivity(intent);
                         }else {
@@ -222,10 +221,10 @@ public class PrincipalActivity extends AppCompatActivity implements
             if(result==TextToSpeech.LANG_NOT_SUPPORTED || result==TextToSpeech.LANG_MISSING_DATA){
                 Log.e("TTS","Este lenguaje no es soportado");
             }else{
-               // if(SharedPreferencesSesion.get(this).getPreferencesUserRol()==4){
-                 //   speakOutDiscapacitado();
-                //}else{
+               //if(numero==4){
                     speakOutDiscapacitado();
+                //}else{
+                //    speakOutNoDiscapacitado();
                 //}
 
             }

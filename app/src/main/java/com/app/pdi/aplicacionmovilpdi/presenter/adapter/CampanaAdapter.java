@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
+import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,6 +23,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import static android.content.Context.VIBRATOR_SERVICE;
 
 public class CampanaAdapter extends RecyclerView.Adapter<CampanaAdapter.CampanaViewHolder>{
 
@@ -60,6 +63,8 @@ public CampanaViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType){
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Vibrator v = (Vibrator) context.getSystemService(VIBRATOR_SERVICE);
+                v.vibrate(200);
                 String texto = "Título, " + lista.get(position).getTitulo()+" Tipo, " + lista.get(position).getTipo();
                 textoSpeech.speak(texto, TextToSpeech.QUEUE_FLUSH,null);
             }
