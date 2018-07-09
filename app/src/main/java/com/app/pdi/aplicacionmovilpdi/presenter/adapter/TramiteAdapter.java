@@ -3,6 +3,7 @@ package com.app.pdi.aplicacionmovilpdi.presenter.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,6 +20,8 @@ import com.app.pdi.aplicacionmovilpdi.view.ContenidoTramiteSeleccionado;
 import java.util.ArrayList;
 
 import java.util.Locale;
+
+import static android.content.Context.VIBRATOR_SERVICE;
 
 public class TramiteAdapter extends RecyclerView.Adapter<TramiteAdapter.TramiteViewHolder>{
 
@@ -57,6 +60,8 @@ public class TramiteAdapter extends RecyclerView.Adapter<TramiteAdapter.TramiteV
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Vibrator v = (Vibrator) context.getSystemService(VIBRATOR_SERVICE);
+                v.vibrate(200);
                 String texto = "Título, " + lista.get(position).getTitulo()+" Tipo, " + lista.get(position).getTipo();
                 textoSpeech.speak(texto, TextToSpeech.QUEUE_FLUSH,null);
             }

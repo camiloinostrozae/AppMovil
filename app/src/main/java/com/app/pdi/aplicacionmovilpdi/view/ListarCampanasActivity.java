@@ -1,5 +1,6 @@
 package com.app.pdi.aplicacionmovilpdi.view;
 
+import android.os.Vibrator;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -67,6 +68,8 @@ public class ListarCampanasActivity extends AppCompatActivity implements Campana
                     tts.stop();
                     tts.shutdown();
                 }
+                Vibrator v = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+                v.vibrate(200);
                 textoSpeech.speak("Botón Volver",TextToSpeech.QUEUE_FLUSH,null);
             }
 
