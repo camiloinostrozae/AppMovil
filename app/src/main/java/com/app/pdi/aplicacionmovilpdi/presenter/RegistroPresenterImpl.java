@@ -119,7 +119,7 @@ public class RegistroPresenterImpl implements RegistroPresenter {
             return false;
         }
 
-        if(telefono.length()>9 || telefono.length()<9){
+        if(telefono.length()>8 || telefono.length()<8){
             view.setEstructuraTelefono();
             view.showProgress(false);
             return false;
@@ -201,10 +201,10 @@ public class RegistroPresenterImpl implements RegistroPresenter {
     }
 
     public boolean validarNombre(String nombre){
-        return nombre.matches("[A-Z][a-zA-Z]*");
+        return nombre.matches("^[\\p{L} .'-]+$");
     }
 
     public boolean validarApellido(String apellido){
-        return apellido.matches("[a-zA-Z]+([ '-][a-zA-Z]+)*");
+        return apellido.matches("^[\\p{L} .'-]+$");
     }
 }
