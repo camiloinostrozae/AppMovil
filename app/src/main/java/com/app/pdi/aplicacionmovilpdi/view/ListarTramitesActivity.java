@@ -176,11 +176,17 @@ public class ListarTramitesActivity extends AppCompatActivity implements Tramite
         int id = item.getItemId();
         if(id == R.id.menu_refresh){
             presenter.onRefreshButtonClick();
+        }else{
+            if(id == R.id.silenciar){
+                if (tts != null) {
+                    tts.stop();
+                    tts.shutdown();
+                }
+            }
         }
 
         return  super.onOptionsItemSelected(item);
     }
-
 
 
 

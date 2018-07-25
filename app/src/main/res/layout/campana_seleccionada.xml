@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background">
 
 
     <ScrollView
@@ -23,9 +24,10 @@
                 android:layout_height="wrap_content"
                 android:textSize="24dp"
                 android:padding="8dp"
+                android:textColor="#fff"
                  />
 
-            <me.biubiubiu.justifytext.library.JustifyTextView
+            <TextView
                 android:id="@+id/contenido_campana_seleccionada"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -34,6 +36,7 @@
                 android:text=""
                 android:textSize="24sp"
                 android:layout_marginTop="90dp"
+                android:textColor="#fff"
                 />
             <ImageButton
                 android:id="@+id/btnStop"
