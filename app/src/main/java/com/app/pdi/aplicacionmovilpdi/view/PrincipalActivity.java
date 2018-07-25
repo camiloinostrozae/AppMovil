@@ -101,7 +101,7 @@ public class PrincipalActivity extends AppCompatActivity implements
                             Intent intent = new Intent(this,ListarTramitesActivity.class);
                             startActivity(intent);
                         }else {
-                            if(grabar.getText().equals("llamada")){
+                            if(grabar.getText().equals("llamada") && numero == 4){
                                 //Para la localizacion
                                 localizacion = new Localizacion(PrincipalActivity.this);
                                 if(localizacion.canGetLocation()){

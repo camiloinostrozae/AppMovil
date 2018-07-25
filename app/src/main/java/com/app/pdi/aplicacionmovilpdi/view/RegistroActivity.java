@@ -151,6 +151,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
         Intent intent = new Intent(this, Login.class);
         intent.putExtra("REGISTRO_EXITOSO",mensaje);
         startActivity(intent);
+        finish();
     }
 
     @Override
@@ -226,7 +227,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
 
     @Override
     public void setEstructuraTelefono() {
-        telefono.setError("El télefono debe contener 9 dígitos");
+        telefono.setError("El télefono debe contener 8 dígitos");
     }
 
     @Override
