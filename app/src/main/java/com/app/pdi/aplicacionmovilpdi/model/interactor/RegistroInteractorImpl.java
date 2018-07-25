@@ -32,7 +32,7 @@ public class RegistroInteractorImpl implements RegistroInteractor {
                 .writeTimeout(60,TimeUnit.SECONDS)
                 .build();
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://"+Urls.direccionJuan+"/web/service/")
+                .baseUrl("http://"+Urls.servidor+"/web/service/")
 
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())

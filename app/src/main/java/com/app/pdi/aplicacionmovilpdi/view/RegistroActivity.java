@@ -451,4 +451,9 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
 }

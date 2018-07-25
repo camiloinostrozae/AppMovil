@@ -22,7 +22,7 @@ public class RestLlamada {
                     .writeTimeout(60,TimeUnit.SECONDS)
                     .build();
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://" + Urls.direccionJuan + "/web/services/service-llamada/")
+                    .baseUrl("http://" + Urls.servidor + "/web/services/service-llamada/")
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

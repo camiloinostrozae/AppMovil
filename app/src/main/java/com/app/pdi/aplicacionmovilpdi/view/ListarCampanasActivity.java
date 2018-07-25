@@ -83,7 +83,7 @@ public class ListarCampanasActivity extends AppCompatActivity implements Campana
                     tts.shutdown();
                 }
                 onBackPressed();
-                textoSpeech.speak(" Volviendo Atrás",TextToSpeech.QUEUE_FLUSH,null);
+                //textoSpeech.speak("Atrás",TextToSpeech.QUEUE_FLUSH,null);
                 return false;
             }
 
@@ -175,6 +175,13 @@ public class ListarCampanasActivity extends AppCompatActivity implements Campana
         int id = item.getItemId();
         if(id == R.id.menu_refresh){
             presenter.onRefreshButtonClick();
+        }else{
+            if(id == R.id.silenciar){
+                if (tts != null) {
+                    tts.stop();
+                    tts.shutdown();
+                }
+            }
         }
 
         return  super.onOptionsItemSelected(item);

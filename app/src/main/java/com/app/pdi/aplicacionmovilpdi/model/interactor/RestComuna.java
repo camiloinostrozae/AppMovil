@@ -22,7 +22,7 @@ public class RestComuna {
                     .writeTimeout(60,TimeUnit.SECONDS)
                     .build();
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://"+Urls.direccionJuan+"/web/services/service-comuna/")
+                    .baseUrl("http://"+Urls.servidor+"/web/services/service-comuna/")
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

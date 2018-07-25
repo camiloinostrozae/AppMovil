@@ -211,4 +211,9 @@ public class Login extends AppCompatActivity implements LoginView {
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
 }
