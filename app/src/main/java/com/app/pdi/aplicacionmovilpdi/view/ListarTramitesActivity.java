@@ -83,8 +83,8 @@ public class ListarTramitesActivity extends AppCompatActivity implements Tramite
                     tts.stop();
                     tts.shutdown();
                 }
+                //textoSpeech.speak("Atrás",TextToSpeech.QUEUE_FLUSH,null);
                 onBackPressed();
-                textoSpeech.speak(" Volviendo Atrás",TextToSpeech.QUEUE_FLUSH,null);
                 return false;
             }
 

@@ -1,0 +1,30 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="">
+
+
+
+
+    <item
+        android:id="@+id/silenciar"
+        android:clickable="true"
+        android:icon="@drawable/ic_volume_off_black_24dp"
+        android:orderInCategory="1"
+        android:title="silenciar"
+        app:showAsAction="always">
+
+    </item>
+    <!--
+        <item
+            android:id="@+id/hablar"
+            android:clickable="true"
+            android:icon="@drawable/ic_volume_up_black_24dp"
+            android:orderInCategory="1"
+            android:title="hablar"
+            app:showAsAction="always"
+            >
+
+        </item>-->
+
+</menu>

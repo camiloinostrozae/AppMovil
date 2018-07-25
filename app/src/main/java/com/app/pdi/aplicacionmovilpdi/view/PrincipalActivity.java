@@ -8,6 +8,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.Manifest;
 import android.app.Activity;
@@ -221,11 +223,11 @@ public class PrincipalActivity extends AppCompatActivity implements
             if(result==TextToSpeech.LANG_NOT_SUPPORTED || result==TextToSpeech.LANG_MISSING_DATA){
                 Log.e("TTS","Este lenguaje no es soportado");
             }else{
-               //if(numero==4){
+               if(numero==4){
                     speakOutDiscapacitado();
-                //}else{
-                //    speakOutNoDiscapacitado();
-                //}
+                }else{
+                   speakOutNoDiscapacitado();
+                }
 
             }
         }else{
@@ -298,4 +300,22 @@ public class PrincipalActivity extends AppCompatActivity implements
             }
         });
     }
+/**
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_app2,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+            if(id == R.id.silenciar) {
+                if (tts != null) {
+                    tts.stop();
+                    tts.shutdown();
+                }
+            }
+        return  super.onOptionsItemSelected(item);
+    }**/
 }

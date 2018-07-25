@@ -83,7 +83,7 @@ public class ListarCampanasActivity extends AppCompatActivity implements Campana
                     tts.shutdown();
                 }
                 onBackPressed();
-                textoSpeech.speak(" Volviendo Atrás",TextToSpeech.QUEUE_FLUSH,null);
+                //textoSpeech.speak("Atrás",TextToSpeech.QUEUE_FLUSH,null);
                 return false;
             }
 

@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -185,6 +187,24 @@ public class ContenidoTramiteSeleccionado extends AppCompatActivity  implements 
                         t.printStackTrace();
                     }
                 });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_app2,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if(id == R.id.silenciar) {
+            if (tts != null) {
+                tts.stop();
+                tts.shutdown();
+            }
+        }
+        return  super.onOptionsItemSelected(item);
     }
 
 
