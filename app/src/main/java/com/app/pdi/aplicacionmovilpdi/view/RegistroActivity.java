@@ -31,6 +31,7 @@ import com.app.pdi.aplicacionmovilpdi.view.interfaces.RegistroView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -124,6 +125,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
 
                     }
                 }, anio, mes, dia);
+                dialog.getDatePicker().setMaxDate(new Date().getTime());
                 dialog.show();
             }
         });
@@ -204,9 +206,11 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
     }
 
     @Override
-    public void setEstructuraEmail() {
-        email.setError("Email inválido");
+    public void setErrorEstructuraEmail() {
+        email.setError("El email ingresado es inválido");
     }
+
+
 
     @Override
     public void setEmailExiste() {
@@ -228,6 +232,11 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
     @Override
     public void setEstructuraTelefono() {
         telefono.setError("El télefono debe contener 8 dígitos");
+    }
+
+    @Override
+    public void setTelefonoExiste() {
+        telefono.setError("El télefono ingresado ya se encuentra registrado en la aplicación");
     }
 
     @Override

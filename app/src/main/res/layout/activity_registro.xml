@@ -122,6 +122,7 @@
                 android:ems="10"
                 android:hint="Fecha de nacimiento"
                 android:inputType="date"
+                android:focusableInTouchMode="false"
                 android:singleLine="true"
                 android:textColor="#fff"
                 android:textColorHint="#fff" />

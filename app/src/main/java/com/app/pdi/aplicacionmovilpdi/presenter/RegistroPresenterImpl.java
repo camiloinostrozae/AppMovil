@@ -50,9 +50,15 @@ public class RegistroPresenterImpl implements RegistroPresenter {
                                 if(inicio.isEstado()){
                                     view.registroSuccess("Registro completado exitosamente");
                                     view.showProgress(false);
-                                }else if(inicio.getCodigo()==1){
+                                }else if(inicio.getCodigo() == 1){
                                     view.setErrorRutExiste();
                                      view.showProgress(false);
+                                }else if(inicio.getCodigo() == 2){
+                                     view.setEmailExiste();
+                                     view.showProgress(false);
+                                }else if(inicio.getCodigo() == 3){
+                                    view.setTelefonoExiste();
+                                    view.showProgress(false);
                                 }else{
                                     view.registroFailed("Datos no válidos");
                                     view.showProgress(false);
@@ -133,7 +139,7 @@ public class RegistroPresenterImpl implements RegistroPresenter {
         }
 
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            view.setErrorEstruturaRut();
+            view.setErrorEstructuraEmail();
             view.showProgress(false);
             return false;
         }

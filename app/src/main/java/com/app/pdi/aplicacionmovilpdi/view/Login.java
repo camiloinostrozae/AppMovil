@@ -1,8 +1,10 @@
 package com.app.pdi.aplicacionmovilpdi.view;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -140,9 +142,17 @@ public class Login extends AppCompatActivity implements LoginView {
 
     public  void isAvailable(){
         if(!NetworkState.getInstance().estadoConexion(this)){
-            Toast.makeText(Login.this,"SIN CONEXIÓN",Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(Login.this,"Si tenemos conexión",Toast.LENGTH_SHORT).show();
+            Log.e("Hola","HOLAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            AlertDialog.Builder dialogo = new AlertDialog.Builder(this);
+            dialogo.setTitle("Aviso");
+            dialogo.setMessage("Conexión a internet no disponible, asegúrese de estar conectado a internet");
+            dialogo.setCancelable(false);
+            dialogo.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialogo, int id) {
+                    finish();
+                }
+            });
+
         }
     }
 

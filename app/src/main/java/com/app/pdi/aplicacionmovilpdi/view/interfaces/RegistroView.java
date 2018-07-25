@@ -13,11 +13,12 @@ public interface RegistroView {
     void setErrorEstruturaRut();
     void setErrorRutExiste();
     void setErrorEmail();
-    void setEstructuraEmail();
+    void setErrorEstructuraEmail();
     void setEmailExiste();
     void setErrorContrasena();
     void setErrorTelefono();
     void setEstructuraTelefono();
+    void setTelefonoExiste();
     void setErrorFechaNacimiento();
     void setErrorSexo();
     void setErrorRegion();
