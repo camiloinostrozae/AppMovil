@@ -163,50 +163,59 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
 
     @Override
     public void setErrorNombre() {
+        nombre.requestFocus();
         nombre.setError("Campo obligatorio");
 
     }
 
     @Override
     public void setNombreNoValido() {
+        nombre.requestFocus();
         nombre.setError("Nombre no válido");
     }
 
     @Override
     public void setErrorApellido() {
+        apellido.requestFocus();
         apellido.setError("Campo obligatorio");
 
     }
 
     @Override
     public void setErrorApellidoNoValido() {
+        apellido.requestFocus();
         apellido.setError("Apellido no válido");
 
     }
 
     @Override
     public void setErrorRut() {
+        rut.requestFocus();
         rut.setError("Campo obligatorio");
     }
 
     @Override
     public void setErrorEstruturaRut() {
+        rut.requestFocus();
         rut.setError("El rut ingresado es inválido");
     }
 
     @Override
     public void setErrorRutExiste() {
+        rut.requestFocus();
         rut.setError("El R.U.T ingresado ya se encuentra registrado en la aplicación ");
     }
 
     @Override
     public void setErrorEmail() {
+        email.requestFocus();
         email.setError("Campo obligatorio");
 
     }
 
     @Override
     public void setErrorEstructuraEmail() {
+        email.requestFocus();
         email.setError("El email ingresado es inválido");
     }
 
@@ -214,6 +223,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
 
     @Override
     public void setEmailExiste() {
+        email.requestFocus();
         email.setError("El email ingresado ya se encuentra registrado en la aplicación");
     }
 
@@ -225,38 +235,45 @@ public class RegistroActivity extends AppCompatActivity implements RegistroView 
 
     @Override
     public void setErrorTelefono() {
+        telefono.requestFocus();
         telefono.setError("Campo obligatorio");
 
     }
 
     @Override
     public void setEstructuraTelefono() {
+        telefono.requestFocus();
         telefono.setError("El télefono debe contener 8 dígitos");
     }
 
     @Override
     public void setTelefonoExiste() {
+        telefono.requestFocus();
         telefono.setError("El télefono ingresado ya se encuentra registrado en la aplicación");
     }
 
     @Override
     public void setErrorFechaNacimiento() {
+        fechaNacimiento.requestFocus();
         fechaNacimiento.setError("Campo obligatorio");
 
     }
 
     @Override
     public void setErrorSexo() {
+        label_sexo.requestFocus();
         label_sexo.setError("Debe seleccionar su sexo");
     }
 
     @Override
     public void setErrorRegion() {
+        label_region.requestFocus();
         label_region.setError("Debe seleccionar una región");
     }
 
     @Override
     public void setErrorComuna() {
+        label_comuna.requestFocus();
         label_comuna.setError("Debe seleccionar una comuna");
     }
 

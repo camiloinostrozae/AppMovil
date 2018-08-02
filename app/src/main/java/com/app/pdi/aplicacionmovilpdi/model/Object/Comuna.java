@@ -8,7 +8,7 @@ public class Comuna {
     @SerializedName("id_comuna")
     @Expose
     private int idComuna;
-    @SerializedName("nombre")
+    @SerializedName("nombreComuna")
     @Expose
     private String nombre;
     @SerializedName("region_id_region")
