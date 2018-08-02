@@ -300,7 +300,7 @@ public class PrincipalActivity extends AppCompatActivity implements
             }
         });
     }
-/**
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_app2,menu);
@@ -317,5 +317,5 @@ public class PrincipalActivity extends AppCompatActivity implements
                 }
             }
         return  super.onOptionsItemSelected(item);
-    }**/
+    }
 }
