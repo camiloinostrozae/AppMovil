@@ -50,9 +50,9 @@ public class PrincipalActivity extends AppCompatActivity implements
         TextToSpeech.OnInitListener{
 
     TextToSpeech tts;
-    TextView etx;
-    TextView grabar;
-    private static final int RECOGNIZE_SPEECH_ACTIVITY = 1;
+    //TextView etx;
+    //TextView grabar;
+    //private static final int RECOGNIZE_SPEECH_ACTIVITY = 1;
     private ActionBar actionBar;
     InicioSesion sesion;
     private Button boton;
@@ -67,9 +67,13 @@ public class PrincipalActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_primero);
+        if(numero==4) {
+            setContentView(R.layout.activity_primero);
+        }else{
+            setContentView(R.layout.activity_principal);
+        }
         tts = new TextToSpeech(this, this);
-        grabar = findViewById(R.id.txtGrabarVoz);
+        //grabar = findViewById(R.id.txtGrabarVoz);
         //Para que la barra de herramientas no muestre el titulo de la app
         actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
@@ -79,7 +83,7 @@ public class PrincipalActivity extends AppCompatActivity implements
         //locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
     }
-
+/**
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -138,7 +142,7 @@ public class PrincipalActivity extends AppCompatActivity implements
 
                 break;
         }
-    }
+    }**/
 
     public void ListarCampanas(View view){
         Intent intent = new Intent(this,ListarCampanasActivity.class);
@@ -150,14 +154,31 @@ public class PrincipalActivity extends AppCompatActivity implements
         startActivity(intent);
     }
 
+    public void RealizarLlamada(View view){
+        //Para la localizacion
+        localizacion = new Localizacion(PrincipalActivity.this);
+        if(localizacion.canGetLocation()){
+            latitud = localizacion.getLatitud();
+            longitud = localizacion.getLongitud();
+            Log.e("Dato","lat************ " + latitud);
+            Log.e("Dato","lat************ " + longitud);
+            generarUbicacion(latitud,longitud);
+        }else{
+            localizacion.showSettingsAlert();
+        }
 
+        speakOutLlamada();
+        esperaLlamada(MILISEGUNDOS_LLAMADA);
+    }
+
+/**
     public void onClickImgBtnHablar(View v) {
 
         speakOut2();
         escuchar();
         //esperar(MILISEGUNDOS_ESPERA);
     }
-
+**/
     /**
     public void esperar(int milisegundos) {
 
@@ -187,7 +208,7 @@ public class PrincipalActivity extends AppCompatActivity implements
         startActivity(i);
     }
 
-
+ /**
     public void escuchar(){
         Intent intentActionRecognizeSpeech = new Intent(
                 RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -203,7 +224,7 @@ public class PrincipalActivity extends AppCompatActivity implements
                     "Tú dispositivo no soporta el reconocimiento por voz",
                     Toast.LENGTH_SHORT).show();
         }
-    }
+    }**/
 
     @Override
     public void onDestroy() {
@@ -222,13 +243,6 @@ public class PrincipalActivity extends AppCompatActivity implements
             int result = tts.setLanguage(Locale.getDefault());
             if(result==TextToSpeech.LANG_NOT_SUPPORTED || result==TextToSpeech.LANG_MISSING_DATA){
                 Log.e("TTS","Este lenguaje no es soportado");
-            }else{
-               if(numero==4){
-                    speakOutDiscapacitado();
-                }else{
-                   speakOutNoDiscapacitado();
-                }
-
             }
         }else{
             Log.e("TTS","Inicializacion del lenguaje es fallida");
@@ -300,7 +314,7 @@ public class PrincipalActivity extends AppCompatActivity implements
             }
         });
     }
-
+/**
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_app2,menu);
@@ -317,5 +331,5 @@ public class PrincipalActivity extends AppCompatActivity implements
                 }
             }
         return  super.onOptionsItemSelected(item);
-    }
+    }**/
 }

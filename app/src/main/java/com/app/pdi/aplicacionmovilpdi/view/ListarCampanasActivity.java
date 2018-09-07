@@ -33,23 +33,24 @@ import java.util.List;
 import java.util.Locale;
 import java.util.zip.Inflater;
 
-public class ListarCampanasActivity extends AppCompatActivity implements CampanaContract.viewCampanas,
-        TextToSpeech.OnInitListener{
+public class ListarCampanasActivity extends AppCompatActivity implements CampanaContract.viewCampanas
+        /**TextToSpeech.OnInitListener**/{
 
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
     private CampanaContract.presenter presenter;
     private ActionBar actionBar;
 
-    private TextToSpeech tts;
-    private TextToSpeech textoSpeech;
-    private Button volver;
+    //private TextToSpeech tts;
+    //private TextToSpeech textoSpeech;
+    //private Button volver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_campanas);
-        tts = new TextToSpeech(this, this);
+        //tts = new TextToSpeech(this, this);
+        /**
         volver = findViewById(R.id.volver);
 
         textoSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
@@ -87,7 +88,7 @@ public class ListarCampanasActivity extends AppCompatActivity implements Campana
                 return false;
             }
 
-        });
+        });**/
 
         inicializarRecyclerView();
         initProgressBar();
@@ -156,10 +157,10 @@ public class ListarCampanasActivity extends AppCompatActivity implements Campana
 
     @Override
     protected void onDestroy(){
-        if (tts != null) {
+        /**if (tts != null) {
             tts.stop();
             tts.shutdown();
-        }
+        }**/
         super.onDestroy();
         presenter.onDestroy();
     }
@@ -173,21 +174,21 @@ public class ListarCampanasActivity extends AppCompatActivity implements Campana
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
-        if(id == R.id.menu_refresh){
+        if(id == R.id.actualizar){
             presenter.onRefreshButtonClick();
-        }else{
+        }/**else{
             if(id == R.id.silenciar){
                 if (tts != null) {
                     tts.stop();
                     tts.shutdown();
                 }
             }
-        }
+        }**/
 
         return  super.onOptionsItemSelected(item);
     }
 
-
+/**
     @Override
     public void onInit(int status) {
 
@@ -195,7 +196,7 @@ public class ListarCampanasActivity extends AppCompatActivity implements Campana
             int result = tts.setLanguage(Locale.getDefault());
             if(result==TextToSpeech.LANG_NOT_SUPPORTED || result==TextToSpeech.LANG_MISSING_DATA){
                 Log.e("TTS","Este lenguaje no es soportado");
-            }else{
+            }/**else{
                 speakOut();
 
             }
@@ -203,7 +204,7 @@ public class ListarCampanasActivity extends AppCompatActivity implements Campana
             Log.e("TTS","Inicializacion del lenguaje es fallida");
         }
     }
-
+/**
     private void speakOut(){
 
         String texto = "A continuación se presentan una lista de botones." +
@@ -212,7 +213,7 @@ public class ListarCampanasActivity extends AppCompatActivity implements Campana
                 "Mantenga presionado el botón para saber su contenido";
          tts.speak(texto,TextToSpeech.QUEUE_FLUSH,null);
 
-    }
+    }**/
 
 
 }

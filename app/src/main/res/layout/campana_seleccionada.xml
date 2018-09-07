@@ -38,6 +38,7 @@
                 android:layout_marginTop="90dp"
                 android:textColor="#fff"
                 />
+            <!--
             <ImageButton
                 android:id="@+id/btnStop"
                 android:layout_width="match_parent"
@@ -47,7 +48,7 @@
                 android:background="#00ffffff"
                 app:srcCompat="?android:attr/actionBarItemBackground"
                 android:layout_alignParentLeft="true"
-                android:onClick="botonDetener"/>
+                android:onClick="botonDetener"/>-->
 
 
         </RelativeLayout>

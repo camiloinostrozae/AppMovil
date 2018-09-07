@@ -52,6 +52,7 @@ public CampanaViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType){
         //Se establece lo que se mostrará en el ReccyclerView
         holder.titulo_campana.setText("Título: " + lista.get(position).getTitulo());
         holder.tipo_campana.setText("Tipo: " + lista.get(position).getTipo());
+        /**
         textoSpeech = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -59,11 +60,11 @@ public CampanaViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType){
                     textoSpeech.setLanguage(Locale.getDefault());
                 }
             }
-        });
+        });**/
         holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
+           @Override
             public void onClick(View view) {
-                Vibrator v = (Vibrator) context.getSystemService(VIBRATOR_SERVICE);
+                /**Vibrator v = (Vibrator) context.getSystemService(VIBRATOR_SERVICE);
                 v.vibrate(200);
                 String texto = "Título, " + lista.get(position).getTitulo()+" Tipo, " + lista.get(position).getTipo();
                 textoSpeech.speak(texto, TextToSpeech.QUEUE_FLUSH,null);
@@ -71,15 +72,15 @@ public CampanaViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType){
         });
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public boolean onLongClick(View view) {
+            public boolean onLongClick(View view) {**/
                 Intent intent =  new Intent(context, ContenidoCampanaSeleccionada.class);
                 //Se pasa a través de la activite el contenido y titulo de la campana que se verá solo en otra activity
                 intent.putExtra("titulo_campana",lista.get(position).getTitulo());
                 intent.putExtra("contenido_campana", lista.get(position).getContenido());
                 intent.putExtra("id_campana",lista.get(position).getIdCampana());
                 context.startActivity(intent);
-                return false;
-            }
+                //return false;
+           }
         });
 
 

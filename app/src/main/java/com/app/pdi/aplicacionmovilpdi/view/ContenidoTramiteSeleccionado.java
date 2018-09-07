@@ -28,9 +28,9 @@ import retrofit2.Response;
 public class ContenidoTramiteSeleccionado extends AppCompatActivity  implements TextToSpeech.OnInitListener{
 
     TextToSpeech tts;
-    TextToSpeech textoSpeech;
+    //TextToSpeech textoSpeech;
     TextView etx;
-    ImageButton botonDetener;
+    //ImageButton botonDetener;
     String titulo;
     String contenido;
     public static int MILISEGUNDOS_ESPERA = 11000;
@@ -47,7 +47,7 @@ public class ContenidoTramiteSeleccionado extends AppCompatActivity  implements 
         registrarInteraccion();
         tts = new TextToSpeech(this, this);
         etx = findViewById(R.id.contenido_tramite_seleccionado);
-        botonDetener = findViewById(R.id.btnStop);
+        /**botonDetener = findViewById(R.id.btnStop);
         textoSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -78,7 +78,7 @@ public class ContenidoTramiteSeleccionado extends AppCompatActivity  implements 
                 return false;
             }
 
-        });
+        });**/
 
         getIntentFromRecycler();
     }
@@ -97,8 +97,9 @@ public class ContenidoTramiteSeleccionado extends AppCompatActivity  implements 
             if(result==TextToSpeech.LANG_NOT_SUPPORTED || result==TextToSpeech.LANG_MISSING_DATA){
                 Log.e("TTS","Este lenguaje no es soportado");
             }else{
-                speakOut2();
-                esperar(MILISEGUNDOS_ESPERA);
+                /**speakOut2();
+                esperar(MILISEGUNDOS_ESPERA);**/
+                speakOut();
             }
         }else{
             Log.e("TTS","Inicializacion del lenguaje es fallida");

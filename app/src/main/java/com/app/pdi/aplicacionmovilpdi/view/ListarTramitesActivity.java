@@ -33,24 +33,24 @@ import java.util.List;
 import java.util.Locale;
 import java.util.zip.Inflater;
 
-public class ListarTramitesActivity extends AppCompatActivity implements TramiteContract.viewTramites,
-        TextToSpeech.OnInitListener{
+public class ListarTramitesActivity extends AppCompatActivity implements TramiteContract.viewTramites
+        /**TextToSpeech.OnInitListener**/{
 
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
     private TramiteContract.presenter presenter;
     private ActionBar actionBar;
 
-    private TextToSpeech tts;
-    private TextToSpeech textoSpeech;
-    private Button volver;
+    //private TextToSpeech tts;
+    //private TextToSpeech textoSpeech;
+    //private Button volver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_tramites);
-        tts = new TextToSpeech(this, this);
-
+        //tts = new TextToSpeech(this, this);
+     /**
         volver = findViewById(R.id.volver);
 
         textoSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
@@ -88,7 +88,7 @@ public class ListarTramitesActivity extends AppCompatActivity implements Tramite
                 return false;
             }
 
-        });
+        }); **/
 
         inicializarRecyclerView();
         initProgressBar();
@@ -157,10 +157,10 @@ public class ListarTramitesActivity extends AppCompatActivity implements Tramite
 
     @Override
     protected void onDestroy(){
-        if (tts != null) {
+       /** if (tts != null) {
             tts.stop();
             tts.shutdown();
-        }
+        }*/
         super.onDestroy();
         presenter.onDestroy();
     }
@@ -174,22 +174,22 @@ public class ListarTramitesActivity extends AppCompatActivity implements Tramite
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
-        if(id == R.id.menu_refresh){
+        if(id == R.id.actualizar){
             presenter.onRefreshButtonClick();
-        }else{
+        }/**else{
             if(id == R.id.silenciar){
                 if (tts != null) {
                     tts.stop();
                     tts.shutdown();
                 }
             }
-        }
+        }**/
 
         return  super.onOptionsItemSelected(item);
     }
 
 
-
+/**
     @Override
     public void onInit(int status) {
 
@@ -214,7 +214,7 @@ public class ListarTramitesActivity extends AppCompatActivity implements Tramite
                 "Mantenga presionado el botón para saber su contenido";
         tts.speak(texto,TextToSpeech.QUEUE_FLUSH,null);
 
-    }
+    }**/
 
 
 }

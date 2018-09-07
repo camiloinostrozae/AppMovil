@@ -11,14 +11,15 @@
         android:id="@+id/recycler_campana"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
+        android:layout_marginTop="8dp"
         android:padding="6dp"
-        android:layout_marginTop="50dp"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--
     <Button
         android:id="@+id/volver"
         android:layout_width="match_parent"
@@ -26,6 +27,6 @@
         android:text="Volver"
         android:gravity="center"
 
-        />
+        /> -->
 
 </android.support.constraint.ConstraintLayout>

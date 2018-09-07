@@ -6,33 +6,34 @@
 
 
     <item
-       android:id="@+id/menu_refresh"
-       android:orderInCategory="3"
-       android:title="menu_refresh"
-       app:showAsAction="always"
-       android:icon="@drawable/ic_refresh_black_24dp">
-
-   </item>
-
-    <item
-        android:id="@+id/silenciar"
-        android:clickable="true"
-        android:icon="@drawable/ic_volume_off_black_24dp"
-        android:orderInCategory="2"
-        android:title="silenciar"
+        android:id="@+id/actualizar"
+        android:icon="@drawable/ic_refresh_black_24dp"
+        android:orderInCategory="3"
+        android:title="actualizar"
         app:showAsAction="always">
 
     </item>
-<!--
-    <item
-        android:id="@+id/hablar"
-        android:clickable="true"
-        android:icon="@drawable/ic_volume_up_black_24dp"
-        android:orderInCategory="1"
-        android:title="hablar"
-        app:showAsAction="always"
-        >
+    <!--
+        <item
+            android:id="@+id/silenciar"
+            android:clickable="true"
+            android:icon="@drawable/ic_volume_off_black_24dp"
+            android:orderInCategory="2"
+            android:title="silenciar"
+            app:showAsAction="always">
 
-    </item>-->
+        </item>
+
+
+        <item
+            android:id="@+id/hablar"
+            android:clickable="true"
+            android:icon="@drawable/ic_volume_up_black_24dp"
+            android:orderInCategory="1"
+            android:title="hablar"
+            app:showAsAction="always"
+            >
+
+        </item>-->
 
 </menu>

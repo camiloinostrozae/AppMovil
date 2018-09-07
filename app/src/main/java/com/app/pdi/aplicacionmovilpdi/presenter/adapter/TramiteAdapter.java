@@ -49,18 +49,18 @@ public class TramiteAdapter extends RecyclerView.Adapter<TramiteAdapter.TramiteV
         //Se establece lo que se mostrará en el ReccyclerView
         holder.titulo_tramite.setText("Título: " + lista.get(position).getTitulo());
         holder.tipo_tramite.setText("Tipo: " + lista.get(position).getTipo());
-        textoSpeech = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
+        /**textoSpeech = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 if (status != TextToSpeech.ERROR) {
                     textoSpeech.setLanguage(Locale.getDefault());
                 }
             }
-        });
+        });**/
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Vibrator v = (Vibrator) context.getSystemService(VIBRATOR_SERVICE);
+               /** Vibrator v = (Vibrator) context.getSystemService(VIBRATOR_SERVICE);
                 v.vibrate(200);
                 String texto = "Título, " + lista.get(position).getTitulo()+" Tipo, " + lista.get(position).getTipo();
                 textoSpeech.speak(texto, TextToSpeech.QUEUE_FLUSH,null);
@@ -68,14 +68,14 @@ public class TramiteAdapter extends RecyclerView.Adapter<TramiteAdapter.TramiteV
         });
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public boolean onLongClick(View view) {
+            public boolean onLongClick(View view) {**/
                 Intent intent =  new Intent(context, ContenidoTramiteSeleccionado.class);
                 //Se pasa a través de la activite el contenido y titulo del tramite que se verá solo en otra activity
                 intent.putExtra("titulo_tramite",lista.get(position).getTitulo());
                 intent.putExtra("contenido_tramite", lista.get(position).getContenido());
                 intent.putExtra("id_tramite",lista.get(position).getIdTramite());
                 context.startActivity(intent);
-                return false;
+                //return false;
             }
         });
 
